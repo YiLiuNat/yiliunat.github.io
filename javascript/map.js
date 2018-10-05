@@ -76,7 +76,39 @@
 			        position: faisalabad
 			    });
 			    addYourLocationButton(map, myMarker);
-			}
+
+			    //DIRECTION
+				var directionsService = new google.maps.DirectionsService;
+				var directionsDisplay = new google.maps.DirectionsRenderer;
+				directionsDisplay.setMap(map);
+				var onChangeHandler = function() {
+			          calculateAndDisplayRoute(directionsService, directionsDisplay);
+			        };
+			        document.getElementById('building').addEventListener('change', onChangeHandler);
+			    }
+
+			    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+			    	
+			    	//GET CURRENT LOCATION
+			    	navigator.geolocation.getCurrentPosition(function(position) {
+			    	//CREATE A VAR FOR CURRENT LOCATION
+        			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			        directionsService.route({
+
+			          origin: latlng,
+			          destination: {lat:52.449970, lng:-1.930870},//document.getElementById('end').value,
+			          travelMode: 'WALKING'
+			        }, function(response, status) {
+			          if (status === 'OK') {
+			            directionsDisplay.setDirections(response);
+			          } else {
+			            window.alert('Directions request failed due to ' + status);
+			          }
+			        });
+			      });
+			    }
+
+			
 
 			$(document).ready(function(e) {
 			    initMap();

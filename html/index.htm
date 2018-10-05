@@ -20,6 +20,11 @@
         height: 100%;
       }
 
+      * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
       #map {
         position: absolute;
         left: 0px;
@@ -37,11 +42,27 @@
         background-color: black;  
        }
 
+       #building {
+        font-size: 0.5rem;
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        width: 3rem;
+        height: 0.5rem;
+        /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAElBMVEUAAABmZmZtbW1mZmZmZmZmZmaPZyHQAAAABXRSTlMA1RV/I8PMOsoAAABZSURBVBjTVZDRCcAwCAWlIwT6n+zQTtAJSvbfJfA4P06IohfUZ32zsOupd3Sydq1/Au6RF0s1LgAPIFBKpAJqEBTQKKARwIm/uQGtPVTreFFJkDjJ1kF0qgMeaxCbAVusmQAAAABJRU5ErkJggg==) no-repeat center center;*/
+        background-size: 0.24rem 0.24rem;
+        
+       }
     </style>
   </head>
   <body>
 
-    <div id="panel"></div>
+    <div id="panel">
+      <select id="building">
+        <option value="" selected="selected"></option>
+        <option value="birmingham">birmingham</option>
+      </select>
+    </div>
     <div id="map"></div>
 
     <script async defer
