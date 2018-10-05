@@ -91,20 +91,21 @@
 			    	
 			    	//GET CURRENT LOCATION
 			    	navigator.geolocation.getCurrentPosition(function(position) {
-			    	//CREATE A VAR FOR CURRENT LOCATION
-        			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			        directionsService.route({
-
-			          origin: latlng,
-			          destination: {lat:52.449970, lng:-1.930870},//document.getElementById('end').value,
-			          travelMode: 'WALKING'
-			        }, function(response, status) {
-			          if (status === 'OK') {
-			            directionsDisplay.setDirections(response);
-			          } else {
-			            window.alert('Directions request failed due to ' + status);
-			          }
-			        });
+			    		//CREATE A VAR FOR CURRENT LOCATION
+	        			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	        			
+				        //DIRECTIONS SERVICE
+				        directionsService.route({
+				          origin: latlng,
+				          destination: document.getElementById('building').value,//GET OPTIONS FROM HTML
+				          travelMode: 'WALKING'
+				        }, function(response, status) {
+				          if (status === 'OK') {
+				            directionsDisplay.setDirections(response);
+				          } else {
+				            window.alert('Directions request failed due to ' + status);
+				          }
+				      });
 			      });
 			    }
 
