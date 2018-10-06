@@ -189,7 +189,7 @@
 			    var myMarker = new google.maps.Marker({
 			        map: map,
 			        animation: google.maps.Animation.DROP,
-			        position: faisalabad
+			        //position: faisalabad
 			    });
 
 			    addYourLocationButton(map, myMarker);
