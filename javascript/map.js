@@ -69,7 +69,8 @@
 			        zoom: 16,
 			        center: faisalabad,
 			        mapTypeControl: false,
-
+			        streetViewControl: false,
+			        fullscreenControl: false,
 			        styles: [
 					    {
 					        "stylers": [
