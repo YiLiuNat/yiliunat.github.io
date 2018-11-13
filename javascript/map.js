@@ -210,8 +210,8 @@ function initMap() {
     };
 
     //GATE POP-UP START
-    $("#building").change(function() {
-    //document.getElementById('select')
+    //$("#building").change(function() {
+    document.getElementById('building').addEventListener('change',function(){
     	// javascript
 		// if (document.getElementById('building').value === '52.449216, -1.931401'){
 		// 	$("#panel").fadeOut();
