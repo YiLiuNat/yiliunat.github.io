@@ -17,7 +17,36 @@
 
 
     <script type="text/babel">
+      function Panel(props) {
+        return  <div>
+                  <div id="panel">
+                    <select id="building">
+                      <option value="" selected="selected"></option>
+                      <option value="AstonWebbBBlock">Aston Webb B Block</option>
+                      <option value="AstonWebbGreatHall">Aston Webb Great Hall</option>
+                      <option value="WatsonBuilding">Watson Building (R15)</option>
+                    </select>
+                  </div>
+                  <div id="gatePop">
+                    <div id="whichGate">Please Select the Entrance</div>
+                    <button id="gateA"></button>
+                    <button id="gateB"></button>
+                  </div>
+                </div>
+                ;
+      }
+
+      const element = <Panel />;
+
       ReactDOM.render(
+        element,
+        document.getElementById('reactFrame')
+      );
+    </script>
+
+
+
+      <!-- ReactDOM.render(
         <div>
           <div id="panel">
             <select id="building">
@@ -31,7 +60,7 @@
         ,
         document.getElementById('reactFrame')
       );
-    </script>
+    </script> -->
 
     
 
