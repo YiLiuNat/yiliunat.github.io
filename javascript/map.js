@@ -3,7 +3,7 @@
 var map;
 var faisalabad = {lat:52.449970, lng:-1.930870};
 var navDest = "1.01, 1.01";
-var mulGate = false;
+var mulGate = true;
 
 function addYourLocationButton(map, marker) 
 {
@@ -199,7 +199,17 @@ function initMap() {
 
     addYourLocationButton(map, myMarker);
 
-    //GATE POP-UP
+
+
+    //DIRECTION
+	var directionsService = new google.maps.DirectionsService;
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	directionsDisplay.setMap(map);
+	var onChangeHandler = function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+    };
+
+    //GATE POP-UP START
     $("select").change(function() {
     	
     	// javascript
@@ -220,36 +230,37 @@ function initMap() {
 				$("#gateA").click(function(){
 					navDest = "52.449216, -1.931401";
 				});
+				document.getElementById('gateA').addEventListener('click',onChangeHandler)
 				break;
 			case ("AstonWebbGreatHall"):
-				mulGate = false;
+				mulGate = true;
 				navDest = "52.449093, -1.930821"
-				$("#gatePop").animate({bottom:'-3rem'});
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
 			case ("WatsonBuilding"):
 				mulGate = false;
 				navDest = "52.450322, -1.929126"
-				$("#gatePop").animate({bottom:'-3rem'});
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
 		}
 
-	}); 
+	}); //GATE POP-UP END
 
-    //DIRECTION
-	var directionsService = new google.maps.DirectionsService;
-	var directionsDisplay = new google.maps.DirectionsRenderer;
-	directionsDisplay.setMap(map);
-	var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        };
+
+
+
+	// var onChangeHandler = function() {
+ //          calculateAndDisplayRoute(directionsService, directionsDisplay);
+ //        };
         //document.getElementById('building').addEventListener('change', onChangeHandler);
         //if this building is a multi gate building
+        //document.getElementById('gateA').addEventListener('click', onChangeHandler)
         
-        if (mulGate === true) {
-        	document.getElementById('gateA').addEventListener('click', onChangeHandler);
-        } else {
-        	document.getElementById('building').addEventListener('change', onChangeHandler);
-        }
+        // if (mulGate === true) {
+        // 	document.getElementById('gateA').addEventListener('click', onChangeHandler);
+        // } else {
+        // 	document.getElementById('building').addEventListener('change', onChangeHandler);
+        // }
     }
 
 
