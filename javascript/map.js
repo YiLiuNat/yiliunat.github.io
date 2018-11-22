@@ -201,7 +201,7 @@ function initMap() {
 
 
 
-    //DIRECTION
+    //DIRECTION SERVICE
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
 	directionsDisplay.setMap(map);
@@ -230,8 +230,23 @@ function initMap() {
 				$("#gateA").click(function(){
 					navDest = "52.449216, -1.931401";
 				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler)
+				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				$("#gateB").click(function(){
+					navDest = "52.449216, -1.929126";
+				});
+				document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
+
+				// if($("#gateA").click()){
+				// 	//$("#gateA").click(function(){
+				// 	navDest = "52.449216, -1.931401";
+				// 	//});
+				// 	document.getElementById('gateA').addEventListener('click',onChangeHandler)
+				// }else if($("#gateB").click()){
+				// 	navDest = "52.450322, -1.929126"
+				// 	document.getElementById('gateB').addEventListener('click',onChangeHandler)
+				// }
+				
 			case ("AstonWebbGreatHall"):
 				mulGate = true;
 				navDest = "52.449093, -1.930821"

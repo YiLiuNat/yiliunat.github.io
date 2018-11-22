@@ -20,6 +20,7 @@
       function Panel(props) {
         return  <div>
                   <div id="panel">
+                    <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
                     <select id="building">
                       <option value="" selected="selected"></option>
                       <option value="AstonWebbBBlock">Aston Webb B Block</option>
@@ -44,25 +45,6 @@
       );
     </script>
 
-
-
-      <!-- ReactDOM.render(
-        <div>
-          <div id="panel">
-            <select id="building">
-              <option value="" selected="selected"></option>
-              <option value="52.449216, -1.931401">Aston Webb B Block</option>
-              <option value="52.449093, -1.930821">Aston Webb Great Hall</option>
-              <option value="52.450322, -1.929126">Watson Building (R15)</option>
-            </select>
-          </div>
-        </div>
-        ,
-        document.getElementById('reactFrame')
-      );
-    </script> -->
-
-    
 
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJlfQuLewKJjyt_WpWZPJFic5Zyh3Tvm4&callback=initMap">

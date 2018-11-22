@@ -41,11 +41,22 @@ html {
   -webkit-box-sizing: border-box;
  }
 
+ #search {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2.475rem;
+  top: 0.6rem;
+  width: 4.95rem;
+  height: 0.5rem;
+ }
+
  #building {
   font-size: 0.3rem;
   position: absolute;
-  left: 0.5rem;
-  top: 1rem;
+  left: 50%;
+  margin-left: -2.5rem;
+  top: 1.4rem;
   width: 5rem;
   height: 0.5rem;
   /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAElBMVEUAAABmZmZtbW1mZmZmZmZmZmaPZyHQAAAABXRSTlMA1RV/I8PMOsoAAABZSURBVBjTVZDRCcAwCAWlIwT6n+zQTtAJSvbfJfA4P06IohfUZ32zsOupd3Sydq1/Au6RF0s1LgAPIFBKpAJqEBTQKKARwIm/uQGtPVTreFFJkDjJ1kF0qgMeaxCbAVusmQAAAABJRU5ErkJggg==) no-repeat center center;*/
