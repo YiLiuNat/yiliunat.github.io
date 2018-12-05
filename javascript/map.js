@@ -65,7 +65,7 @@ function addYourLocationButton(map, marker)
 }
 
 
-
+//Map style
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -226,6 +226,7 @@ function initMap() {
 		switch ($("#building").val()){
 			case ("AstonWebbBBlock"):
 				mulGate = true;
+
 				$("#gatePop").animate({bottom:'0'});
 				$("#gateA").click(function(){
 					navDest = "52.449216, -1.931401";
@@ -256,6 +257,18 @@ function initMap() {
 				mulGate = false;
 				navDest = "52.450322, -1.929126"
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("StaffHouse"):
+				$("#gateA").append("<img id='staffhouse1' src='../img/staffhouse1.png'/>")
+				$("#gatePop").animate({bottom:'0'});
+				$("#gateA").click(function(){
+					navDest = "52.450400, -1.932921";
+				});
+				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				$("#gateB").click(function(){
+					navDest = "52.450541, -1.931957";
+				});
+				document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
 		}
 

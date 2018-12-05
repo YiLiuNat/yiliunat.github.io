@@ -100,3 +100,11 @@ html {
   top: 1rem;
   background-color: grey;
  }
+
+ #staffhouse1 {
+  position: absolute;
+  width: 2.5rem;
+  height: 1.5rem;
+  right: 0rem;
+  top: 0rem;
+ }
