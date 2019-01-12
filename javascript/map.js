@@ -221,7 +221,7 @@ function initMap() {
     }//getMinutes can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
     var time = parseInt(date.getHours()+''+minutes);//Get current time (returns int eg1100)
     var week = date.getDay();//new Date().getDay();//Get the day of week (returns num eg1,2,3)
-    var _week = 2;//week - 1; //First element in JS is [0]
+    var _week = week - 1; //First element in JS is [0]
     //var _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
 
     for (var j = _week; j < 7; j++){
