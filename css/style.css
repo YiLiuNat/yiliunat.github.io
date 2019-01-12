@@ -35,34 +35,72 @@ html {
   position: absolute;
   left: 0px;
   top: 0rem;
-  height: 2.5rem;  
+  height: 4rem;  
   width: 100%;
-  background-color: grey;
+  background-color: white;
+  /*background-color: grey;*/
   -webkit-box-sizing: border-box;
  }
 
  #search {
-  font-size: 0.3rem;
+  font-size: 0.2rem;
   position: absolute;
   left: 50%;
-  margin-left: -2.475rem;
-  top: 0.6rem;
-  width: 4.95rem;
-  height: 0.5rem;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
  }
 
  #building {
   font-size: 0.3rem;
   position: absolute;
   left: 50%;
-  margin-left: -2.5rem;
-  top: 1.4rem;
-  width: 5rem;
-  height: 0.5rem;
+  margin-left: -2rem;
+  top: 0.9rem;
+  width: 4rem;
+  height: 0.4rem;
   /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAElBMVEUAAABmZmZtbW1mZmZmZmZmZmaPZyHQAAAABXRSTlMA1RV/I8PMOsoAAABZSURBVBjTVZDRCcAwCAWlIwT6n+zQTtAJSvbfJfA4P06IohfUZ32zsOupd3Sydq1/Au6RF0s1LgAPIFBKpAJqEBTQKKARwIm/uQGtPVTreFFJkDjJ1kF0qgMeaxCbAVusmQAAAABJRU5ErkJggg==) no-repeat center center;*/
   background-size: 0.24rem 0.24rem;
-  
+  border: 1px solid grey;
+  border-radius: 0.1rem;
  }
+
+#reminder {
+  position: absolute;
+  top: 1.5rem;
+  height: 3rem;
+  width: 5.2rem;
+  left: 50%;
+  margin-left: -2.6rem;
+}
+
+ #yourNextText {
+  font-size: 0.32rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.3rem;
+  top: 0.1rem;
+  width: 2.6rem;
+  height: 1rem;
+  text-align: center;
+ }
+
+#lecture {
+  position: relative;
+  font-size: 0.2rem;
+  text-align: center;
+  top: 0.5rem;
+}
+
+#time {
+  position: relative;
+  font-size: 0.8rem;
+  text-align: center;
+  top: 0.5rem;
+}
 
  #gatePop {
   position: absolute;
@@ -101,7 +139,7 @@ html {
   background-color: grey;
  }
 
- #staffhouse1 {
+ #pic {
   position: absolute;
   width: 2.5rem;
   height: 1.5rem;
