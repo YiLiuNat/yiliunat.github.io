@@ -14,12 +14,12 @@ function addYourLocationButton(map, marker)
     firstChild.style.backgroundColor = '#fff';
     firstChild.style.border = 'none';
     firstChild.style.outline = 'none';
-    firstChild.style.width = '0.56rem';
-    firstChild.style.height = '0.56rem';
+    firstChild.style.width = '0.6rem';
+    firstChild.style.height = '0.6rem';
     firstChild.style.borderRadius = '0.04rem';
-    firstChild.style.boxShadow = '0 0.02rem 0.08rem rgba(0,0,0,0.3)';
+    firstChild.style.boxShadow = '0 0 0.01rem rgba(0,0,0,0.3)';
     firstChild.style.cursor = 'pointer';
-    firstChild.style.marginRight = '0.2rem'; //button's margin
+    firstChild.style.marginRight = '0.17rem'; //button's margin
     firstChild.style.padding = '0rem';
     firstChild.title = 'Your Location';
     controlDiv.appendChild(firstChild);
@@ -68,7 +68,7 @@ function addYourLocationButton(map, marker)
 
 
 
-//Map style
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -76,7 +76,7 @@ function initMap() {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        styles: [
+        styles: [ //Map style descipt
 		    {
 		        "stylers": [
 		            {
@@ -213,41 +213,166 @@ function initMap() {
     };
 
 
-    //LECTURE SERVICE
-    var date = new Date();
-    var minutes = date.getMinutes();
-    if(minutes < 10){
-    	minutes = '0'+minutes;
-    }//getMinutes can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
-    var time = parseInt(date.getHours()+''+minutes);//Get current time (returns int eg1100)
-    var week = date.getDay();//new Date().getDay();//Get the day of week (returns num eg1,2,3)
-    var _week = week - 1; //First element in JS is [0]
-    //var _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
 
-    for (var j = _week; j < 7; j++){
-    	if (j > 4){j = 0; time = 800;}//if today is Sat or Sun, set it as Mon 8 AM
-    	if (j == 4 & timeTable[4].lectures[0] == undefined){//if Today is Friday, and no lecture today
-    		j = -1;//set j as Monday.
-    	}
-    	
-    	if (timeTable[j].lectures[0] !== undefined){ //if there's lecture on jst day 
-    		var i = 0;
-    		try{
-	    		while(time > timeTable[j].lectures[i].time){ //comapre current time with the first lecture's time
-		    		i = i+1;//if lecture's time past, check next lecture's time.
-		   		}
-		   		var lectTimeStr = timeTable[j].lectures[i].time.toString();
-	    		$("#lecture").append('<span>' + timeTable[j].lectures[i].lect + '</span>');
-	    		$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
-	    		break;
-	    	}catch(err){//if all today's lecture past, continue the loop.
-	    		time = 800; // reset time as 0, make sure the time always doesn't past the next lecture's.
-	    		if (j == 4){j = -1;}// If today is Friday, set j as Monday (-1, loop will make j+1 = 0).
+
+    //GATE POP-UP START
+    //$("#building").change(function() {
+    
+    //有效的
+    //document.getElementById('building').addEventListener('change',function(){
+    $('#building').change(function(){
+    	// javascript
+		// if (document.getElementById('building').value === '52.449216, -1.931401'){
+		// 	$("#panel").fadeOut();
+		// 	}
+
+		// jquery if
+		// if ($("#building").val('52.449216, -1.931401')){
+		//  	$("#gatePop").animate({bottom:'0'});
+		//  	break;
+		// }
+
+		switch ($("#building").val()){
+			case ("AstonWebbBBlock"):
+				mulGate = false;				
+				navDest = "52.449216, -1.931401";
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+
+				// if($("#gateA").click()){
+				// 	//$("#gateA").click(function(){
+				// 	navDest = "52.449216, -1.931401";
+				// 	//});
+				// 	document.getElementById('gateA').addEventListener('click',onChangeHandler)
+				// }else if($("#gateB").click()){
+				// 	navDest = "52.450322, -1.929126"
+				// 	document.getElementById('gateB').addEventListener('click',onChangeHandler)
+				// }
+				
+			case ("AstonWebbGreatHall"):
+				mulGate = true;
+				//navDest = "52.449093, -1.930821"
+				$("#gatePop").animate({bottom:'-3rem'});
+				//$("#gatePop").animate({bottom:'0'});
+				$("#gateA").append("<img id='pic' src='../img/greathall1.png'/>");
+				$("#gateB").append("<img id='pic' src='../img/greathall2.png'/>");
+				$("#gatePop").animate({bottom:'0'});
+				$("#gateA").click(function(){
+					navDest = latlngData.AstonWebbGreatHallG1;
+				});
+				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				$("#gateB").click(function(){
+					navDest = latlngData.AstonWebbGreatHallG2;
+				});
+				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				break;
+			case ("ComputerScience"):
+				mulGate = false;
+				navDest = latlngData.ComputerScience;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("WatsonBuilding"):
+				mulGate = false;
+				navDest = latlngData.WatsonBuilding;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("StaffHouse"):
+				$("#gatePop").animate({bottom:'-3rem'});
+				//$("#gatePop").animate({bottom:'0'});
+				$("#gateA").append("<img id='pic' src='../img/staffhouse1.png'/>");
+				$("#gateB").append("<img id='pic' src='../img/staffhouse2.png'/>");
+				$("#gatePop").animate({bottom:'0'});
+				$("#gateA").click(function(){
+					navDest = latlngData.StaffHouseG1;
+				});
+				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				$("#gateB").click(function(){
+					navDest = latlngData.StaffHouseG2;
+				});
+				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				break;
+			case ("Library"):
+				$("#gatePop").animate({bottom:'-3rem'});
+				//$("#gatePop").animate({bottom:'0'});
+				$("#gateA").append("<img id='pic' src='../img/library1.png'/>");
+				$("#gateB").append("<img id='pic' src='../img/library2.jpg'/>");
+				$("#gatePop").animate({bottom:'0'});
+				$("#gateA").click(function(){
+					navDest = latlngData.LibraryG1;
+				});
+				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				$("#gateB").click(function(){
+					navDest = latlngData.LibraryG2;
+				});
+				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				break;
+			case ("SportsandExercise"):
+				mulGate = false;
+				navDest = latlngData.SportsandExercise;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+		}
+
+	}); //GATE POP-UP END
+	 // 	 var onChangeHandler = function() {
+	 //          calculateAndDisplayRoute(directionsService, directionsDisplay);
+	 //        };
+	 //        document.getElementById('building').addEventListener('change', onChangeHandler);
+	 //        if this building is a multi gate building
+	 //        document.getElementById('gateA').addEventListener('click', onChangeHandler)
+	        
+	 //        if (mulGate === true) {
+	 //        	document.getElementById('gateA').addEventListener('click', onChangeHandler);
+	 //        } else {
+	 //        	document.getElementById('building').addEventListener('change', onChangeHandler);
+	 //        }
+
+    //LECTURE REMINDER
+    function lecture(){
+	    var date = new Date();
+	    var minutes = date.getMinutes();
+	    if(minutes < 10){
+	    	minutes = '0'+minutes;
+	    }//getMinutes can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
+	    var time = parseInt(date.getHours()+''+minutes);//Get current time (returns int eg1100)
+	    var week = date.getDay();//Get the day of week (returns num eg1,2,3)
+	    var _week = 0;//week - 1; //First element in JS is [0]
+	    //var _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
+	    var forcebreak = 0;
+	    for (var j = _week; j < 7; j++){
+	    	if (j > 4){j = 0; time = 800;}//if today is Sat or Sun, set it as Mon 8 AM
+	    	if (j == 4 & timeTable[4].lectures[0] == undefined){//if Today is Friday, and no lecture today
+	    		j = 0;//set j as Monday.
+	    		time = 800;
 	    	}
-    	} 
-    }
+	    	
+	    	if (timeTable[j].lectures[0] !== undefined){ //if there's lecture on jst day 
+	    		var i = 0;
+	    		try{
+		    		while(time > timeTable[j].lectures[i].time){ //comapre current time with the first lecture's time
+			    		i += 1;//if lecture's time past, check next lecture's time.
+			   		}
+			   		var lectTimeStr = timeTable[j].lectures[i].time.toString();
+		    		$("#lecture").html('<span>' + timeTable[j].lectures[i].lect + '</span>');//show lecture name
+		    		$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
+					$("#building").val(timeTable[j].lectures[i].location);//Change the OPTION value
+					//alert(timeTable[j].lectures[i].location);
+					$("#building").change();
+		    		break;
+		    	}catch(err){//if all today's lecture past, continue the loop.
+		    		time = 800; // reset time as 0, make sure the time always doesn't past the next lecture's.
+		    		if (j == 4){j = -1;}// If today is Friday, set j as Monday (-1, loop will make j+1 = 0).
+		    	}
+	    	}
+	    	forcebreak += 1;
+	    	if(forcebreak == 14){forcebreak = 0; alert("Timetable Error"); break;}//break the loop in case of infinity
+	    }
+	};
+	lecture();
+	setInterval(lecture, 30000);
 
- //    try{
+
+    // try{
 	//     while(time > _timetable.lectures[i].time){ //if lectures[i] is defined, show ongoing lecture
 	//     	i = i+1;
 	//     }
@@ -287,114 +412,8 @@ function initMap() {
 
     //$("#lecture").append('<span>' + _timetable.lectures[0].lect + time +'</span>');
 
-    //GATE POP-UP START
-    //$("#building").change(function() {
-    document.getElementById('building').addEventListener('change',function(){
-    	// javascript
-		// if (document.getElementById('building').value === '52.449216, -1.931401'){
-		// 	$("#panel").fadeOut();
-		// 	}
 
-		// jquery if
-		// if ($("#building").val('52.449216, -1.931401')){
-		//  	$("#gatePop").animate({bottom:'0'});
-		//  	break;
-		// }
-
-		switch ($("#building").val()){
-			case ("AstonWebbBBlock"):
-				mulGate = false;				
-				navDest = "52.449216, -1.931401";
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
-				break;
-
-				// if($("#gateA").click()){
-				// 	//$("#gateA").click(function(){
-				// 	navDest = "52.449216, -1.931401";
-				// 	//});
-				// 	document.getElementById('gateA').addEventListener('click',onChangeHandler)
-				// }else if($("#gateB").click()){
-				// 	navDest = "52.450322, -1.929126"
-				// 	document.getElementById('gateB').addEventListener('click',onChangeHandler)
-				// }
-				
-			case ("AstonWebbGreatHall"):
-				mulGate = true;
-				//navDest = "52.449093, -1.930821"
-				$("#gatePop").animate({bottom:'-3rem'});
-				//$("#gatePop").animate({bottom:'0'});
-				$("#gateA").append("<img id='pic' src='../img/greathall1.png'/>");
-				$("#gateB").append("<img id='pic' src='../img/greathall2.png'/>");
-				$("#gatePop").animate({bottom:'0'});
-				$("#gateA").click(function(){
-					navDest = "52.449093, -1.930821";
-				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
-				$("#gateB").click(function(){
-					navDest = "52.448617, -1.930905";
-				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
-				break;
-			case ("ComputerScience"):
-				mulGate = false;
-				navDest = "52.450322, -1.92126"
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
-				break;
-			case ("WatsonBuilding"):
-				mulGate = false;
-				navDest = "52.450322, -1.929126"
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
-				break;
-			case ("StaffHouse"):
-				$("#gatePop").animate({bottom:'-3rem'});
-				//$("#gatePop").animate({bottom:'0'});
-				$("#gateA").append("<img id='pic' src='../img/staffhouse1.png'/>");
-				$("#gateB").append("<img id='pic' src='../img/staffhouse2.png'/>");
-				$("#gatePop").animate({bottom:'0'});
-				$("#gateA").click(function(){
-					navDest = "52.450400, -1.932921";
-				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
-				$("#gateB").click(function(){
-					navDest = "52.450541, -1.931957";
-				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
-				break;
-			case ("Library"):
-				$("#gatePop").animate({bottom:'-3rem'});
-				//$("#gatePop").animate({bottom:'0'});
-				$("#gateA").append("<img id='pic' src='../img/library1.png'/>");
-				$("#gateB").append("<img id='pic' src='../img/library2.jpg'/>");
-				$("#gatePop").animate({bottom:'0'});
-				$("#gateA").click(function(){
-					navDest = "52.451312, -1.931449";
-				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
-				$("#gateB").click(function(){
-					navDest = "52.451453, -1.931052";
-				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
-				break;
-		}
-
-	}); //GATE POP-UP END
-
-
-
-
-	// var onChangeHandler = function() {
- //          calculateAndDisplayRoute(directionsService, directionsDisplay);
- //        };
-        //document.getElementById('building').addEventListener('change', onChangeHandler);
-        //if this building is a multi gate building
-        //document.getElementById('gateA').addEventListener('click', onChangeHandler)
-        
-        // if (mulGate === true) {
-        // 	document.getElementById('gateA').addEventListener('click', onChangeHandler);
-        // } else {
-        // 	document.getElementById('building').addEventListener('change', onChangeHandler);
-        // }
-    }
+}
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	
@@ -421,20 +440,3 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
   });
 }
-
-//GATE SELECT
-// function gateSelect() {
-// 	if (document.getElementById('building').value === '52.449216, -1.931401'){
-// 		$("#panel").fadeOut();
-// 	}
-// }
-
-
-
-
-// $(document).ready(function(e) {
-//     initMap();
-// });
-
-
-		// });

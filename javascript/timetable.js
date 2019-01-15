@@ -5,22 +5,22 @@ var timeTable = [{
 		"lect": "monday LH Human Computer Interaction",
 		"location": "ComputerScience"
 	}]
-	// lectures: [undefined]
+	//lectures: [undefined]
 },
 {
 	day: 2,
 	lectures: [{
 		"time": 1100,
-		"lect": "Tue Human Computer Interaction",
-		"location": "ComputerScience"
+		"lect": "Intelligent Robotics / Intelligent Robotics(Extend)",
+		"location": "SportsandExercise"
 	}]
 },
 {
 	day: 3,
 	lectures: [{
 		"time": 1400,
-		"lect": "Wed Human Computer Interaction",
-		"location": "ComputerScience"
+		"lect": "LM/LH Networks",
+		"location": "SportsandExercise"
 	}]
 },
 {
@@ -51,5 +51,6 @@ var timeTable = [{
 		"location": "ComputerScience"
 	}
 	]
+	//lectures: [undefined]
 }
 ];

@@ -52,6 +52,7 @@ html {
   height: 0.4rem;
   border: 1px solid grey;
   border-radius: 0.1rem;
+  display: none;
  }
 
  #building {
