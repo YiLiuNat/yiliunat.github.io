@@ -329,15 +329,15 @@ function initMap() {
 
     //LECTURE REMINDER
     function lecture(){
-	    var date = new Date();
-	    var minutes = date.getMinutes();
-	    if(minutes < 10){
-	    	minutes = '0'+minutes;
-	    }//getMinutes can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
-	    var time = parseInt(date.getHours()+''+minutes);//Get current time (returns int eg1100)
-	    var week = date.getDay();//Get the day of week (returns num eg1,2,3)
-	    var _week = 0;//week - 1; //First element in JS is [0]
-	    //var _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
+	    var date = new Date()
+	      , minutes = date.getMinutes()
+	      , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
+	      , week = date.getDay()//Get the day of week (returns num eg1,2,3)
+	      , _week = 0;//week - 1; //First element in JS is [0]
+	    //, _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
+		if(minutes < 10){minutes = '0'+minutes;}
+		//getMinutes() can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
+
 	    var forcebreak = 0;
 	    for (var j = _week; j < 7; j++){
 	    	if (j > 4){j = 0; time = 800;}//if today is Sat or Sun, set it as Mon 8 AM
@@ -369,7 +369,7 @@ function initMap() {
 	    }
 	};
 	lecture();
-	setInterval(lecture, 30000);
+	//setInterval(lecture, 30000);
 
 
     // try{
@@ -415,16 +415,18 @@ function initMap() {
 
 }
 
+
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	
 	//GET CURRENT LOCATION
 	navigator.geolocation.getCurrentPosition(function(position) {
 		//CREATE A VAR FOR CURRENT LOCATION
-		var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		
+		var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		
         //DIRECTIONS SERVICE
         directionsService.route({
-          origin: latlng,
+          origin: currentLocation,
           destination: navDest,//document.getElementById('building').value,//GET OPTIONS FROM HTML
           travelMode: 'WALKING'
         }, function(response, status) {
@@ -434,9 +436,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             window.alert('Directions request failed due to ' + status);
           }
       });
-
-
-
-
   });
 }
+
+var refreshLoc = setInterval(function(){calculateAndDisplayRoute()},20000)
