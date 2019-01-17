@@ -220,6 +220,7 @@ function initMap() {
     
     //有效的
     //document.getElementById('building').addEventListener('change',function(){
+    var isRefresh = false;
     $('#building').change(function(){
     	// javascript
 		// if (document.getElementById('building').value === '52.449216, -1.931401'){
@@ -252,11 +253,16 @@ function initMap() {
 			case ("AstonWebbGreatHall"):
 				mulGate = true;
 				//navDest = "52.449093, -1.930821"
-				$("#gatePop").animate({bottom:'-3rem'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
+				//$("#gatePop").animate({bottom:'-3rem'});
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/greathall1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/greathall2.png'/>");
-				$("#gatePop").animate({bottom:'0'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				//$("#gatePop").animate({bottom:'0'});
+				if(navDest == latlngData.AstonWebbGreatHallG1 | navDest == latlngData.AstonWebbGreatHallG2){
+					$("#gatePop").animate({bottom:'0'},onChangeHandler);;
+				}//if you keep the selection, then refresh directly
 				$("#gateA").click(function(){
 					navDest = latlngData.AstonWebbGreatHallG1;
 				});
@@ -277,11 +283,14 @@ function initMap() {
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
 			case ("StaffHouse"):
-				$("#gatePop").animate({bottom:'-3rem'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/staffhouse1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/staffhouse2.png'/>");
-				$("#gatePop").animate({bottom:'0'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				if(navDest == latlngData.StaffHouseG1 | navDest == latlngData.StaffHouseG2){
+					$("#gatePop").animate({bottom:'0'},onChangeHandler);
+				}
 				$("#gateA").click(function(){
 					navDest = latlngData.StaffHouseG1;
 				});
@@ -292,11 +301,14 @@ function initMap() {
 				document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
 			case ("Library"):
-				$("#gatePop").animate({bottom:'-3rem'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/library1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/library2.jpg'/>");
-				$("#gatePop").animate({bottom:'0'});
+				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				if(navDest == latlngData.LibraryG1 | navDest == latlngData.LibraryG2){
+					$("#gatePop").animate({bottom:'0'},onChangeHandler);
+				}
 				$("#gateA").click(function(){
 					navDest = latlngData.LibraryG1;
 				});
@@ -355,7 +367,7 @@ function initMap() {
 			   		}
 			   		var lectStr = timeTable[j].lectures[i].lect
 			   		  , lectTimeStr = timeTable[j].lectures[i].time.toString()
-			   		lectBuildStr = timeTable[j].lectures[i].location;
+			   		  , lectBuildStr = timeTable[j].lectures[i].location;
 
 		    		$("#lecture").html('<span>' + lectStr + '</span>');//show lecture name
 		    		$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
@@ -376,6 +388,7 @@ function initMap() {
 	$("#building").click(function(){//if user changed the selection,
 		clearInterval(refreshTimetable);//then clear the timetable refresh interval
 		var refreshCustomLoca = setInterval(function(){
+			isRefresh = true;//State this is a auto refresh(cancel the animation)
 			$("#building").change();//set a new interval that triggers location refresh
 		}, 15000);
 	});
