@@ -329,7 +329,7 @@ function initMap() {
 
     //LECTURE REMINDER
     var lectBuildStr = undefined;
-    var refreshTimetable = setInterval(lecture, 20000);
+    var refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
     function lecture(){
 		var date = new Date()
 		  , minutes = date.getMinutes()
@@ -373,7 +373,12 @@ function initMap() {
 	    }
 	};
 	lecture();
-	$("#building").click(function(){clearInterval(refreshTimetable);});
+	$("#building").click(function(){//if user changed the selection,
+		clearInterval(refreshTimetable);//then clear the timetable refresh interval
+		var refreshCustomLoca = setInterval(function(){
+			$("#building").change();//set a new interval that triggers location refresh
+		}, 15000);
+	});
 	
 	//alert(lectBuildStr);
 	// if ($("#building").val() !== lectBuildStr){
