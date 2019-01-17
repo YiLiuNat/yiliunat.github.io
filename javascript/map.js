@@ -328,13 +328,14 @@ function initMap() {
 	 //        }
 
     //LECTURE REMINDER
+    var lectBuildStr = undefined;
+    var refreshTimetable = setInterval(lecture, 20000);
     function lecture(){
-	    var date = new Date()
-	      , minutes = date.getMinutes()
-	      , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
-	      , week = date.getDay()//Get the day of week (returns num eg1,2,3)
-	      , _week = 0;//week - 1; //First element in JS is [0]
-	    //, _timetable = timeTable[_week];//Get the specific day's lecture (try replace _week to 0)
+		var date = new Date()
+		  , minutes = date.getMinutes()
+		  , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
+		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
+		  , _week = 0;//week - 1; //First element in JS is [0]
 		if(minutes < 10){minutes = '0'+minutes;}
 		//getMinutes() can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
 
@@ -352,10 +353,13 @@ function initMap() {
 		    		while(time > timeTable[j].lectures[i].time){ //comapre current time with the first lecture's time
 			    		i += 1;//if lecture's time past, check next lecture's time.
 			   		}
-			   		var lectTimeStr = timeTable[j].lectures[i].time.toString();
-		    		$("#lecture").html('<span>' + timeTable[j].lectures[i].lect + '</span>');//show lecture name
+			   		var lectStr = timeTable[j].lectures[i].lect
+			   		  , lectTimeStr = timeTable[j].lectures[i].time.toString()
+			   		lectBuildStr = timeTable[j].lectures[i].location;
+
+		    		$("#lecture").html('<span>' + lectStr + '</span>');//show lecture name
 		    		$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
-					$("#building").val(timeTable[j].lectures[i].location);//Change the OPTION value
+					$("#building").val(lectBuildStr);//Change the OPTION value
 					//alert(timeTable[j].lectures[i].location);
 					$("#building").change();
 		    		break;
@@ -369,7 +373,14 @@ function initMap() {
 	    }
 	};
 	lecture();
-	//setInterval(lecture, 30000);
+	$("#building").click(function(){clearInterval(refreshTimetable);});
+	
+	//alert(lectBuildStr);
+	// if ($("#building").val() !== lectBuildStr){
+	// 	clearInterval(refreshTimetable);
+	// 	alert($("#building").click());
+	// }
+	
 
 
     // try{
@@ -439,4 +450,5 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   });
 }
 
-var refreshLoc = setInterval(function(){calculateAndDisplayRoute()},20000)
+//两个重复二选一
+//var refreshLoc = setInterval(function(){calculateAndDisplayRoute()},20000)
