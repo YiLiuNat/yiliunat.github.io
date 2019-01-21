@@ -23,6 +23,7 @@ html {
   box-sizing: border-box;
 }
 
+
 #map {
   position: absolute;
   left: 0px;
@@ -31,7 +32,7 @@ html {
   width: 100%;  
  }
 
- #panel {
+#panel {
   position: absolute;
   left: 0px;
   top: 0rem;
@@ -40,7 +41,44 @@ html {
   background-color: white;
   /*background-color: grey;*/
   -webkit-box-sizing: border-box;
- }
+}
+
+#uploadBtn {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+}
+
+#clear {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: 1.5rem;
+  top: 0.4rem;
+  width: 0.5rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+}
+
+#tableUpload {
+  font-size: 0.2rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+  display: none;
+}
 
  #search {
   font-size: 0.2rem;

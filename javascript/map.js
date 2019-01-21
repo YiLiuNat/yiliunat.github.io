@@ -339,6 +339,124 @@ function initMap() {
 	 //        	document.getElementById('building').addEventListener('change', onChangeHandler);
 	 //        }
 
+
+	//READ TIMETABLE
+	//local storage read
+    $('#uploadBtn').click(function(){
+    	$('#tableUpload').click();
+    });
+    var filename = localStorage.getItem("filename");//filename in localstorage
+    var fileresult = localStorage.getItem("fileresult");//file content in storage(string）
+    function isLoad(){
+	    if(filename && fileresult){//if already have this file in localstorage
+	        //storageFile：通过localStorage中的文件内容和文件名构建的File对象
+	        var storageFile = new File([fileresult], {"type":"text/plain"});//File继承自Blob，可以用Blob的构造函数
+	        Object.defineProperty(storageFile,'name',{value:filename});
+	        
+	        $("#uploadBtn").text("Timetable Loaded");
+	        $("#uploadBtn").css("width","3.4rem");
+	        $("#panel").append("<button id ='clear' type='button'>&#10005;</button>");
+	        $("#clear").click(function(){
+	        	localStorage.removeItem("filename");
+	        	localStorage.removeItem("fileresult");
+	        	window.location.reload();
+	        });
+	        alert(localStorage.getItem("fileresult"));
+	    }
+	}
+	isLoad();
+    function loadFile(file){
+        var fileReader = new FileReader();
+        fileReader.onload = function(){
+            var result = this.result;//文件内容
+            //确定，将文件保存到本地存储中，替换现有的
+            try {
+                localStorage.setItem("filename", file.name);
+                localStorage.setItem("fileresult", result);
+                window.location.reload();
+            }
+            catch (e) {
+                console.log("Storage failed: " + e);
+            }
+        };
+        fileReader.readAsText(file);
+    }
+
+    $("#tableUpload").change(function(){
+    	loadFile(this.files[0]);
+    });
+
+
+
+	//-----------------------------------	
+    // $('#uploadBtn').click(function(){
+    // 	$('#tableUpload').click();
+    // });
+    // var filename_1 = localStorage.getItem("filename_1");//filename in localstorage
+    // var fileresult_1 = localStorage.getItem("fileresult_1");//file content in storage(string）
+   
+    // if(filename_1 && fileresult_1){//if already have this file in localstorage
+    //     //storageFile：通过localStorage中的文件内容和文件名构建的File对象
+    //     var storageFile = new File([fileresult_1], {"type":"text/plain"});//File继承自Blob，可以用Blob的构造函数
+    //     Object.defineProperty(storageFile,'name',{value:filename_1});
+        
+    //     $("#uploadBtn").text("Timetable Loaded");
+    //     $("#uploadBtn").css("width","3.4rem");
+    //     $("#uploadBtn").append("<button id ='clear' type='button'>&#10005;</button>");
+    //     $("#clear").click(function(){
+    //     	localStorage.removeItem("filename_1");
+    //     	localStorage.removeItem("fileresult_1");
+    //     	window.location.reload();
+    //     });
+    //     alert(localStorage.getItem("fileresult_1"));
+    // }
+
+    // function loadFile(file){
+    //     var fileReader = new FileReader();
+    //     fileReader.onload = function () {
+    //         var result = this.result;//文件内容
+    //         //确定，将文件保存到本地存储中，替换现有的
+    //         try {
+    //             localStorage.setItem("filename_1", file.name);
+    //             localStorage.setItem("fileresult_1", result);
+    //         }
+    //         catch (e) {
+    //             console.log("Storage failed: " + e);
+    //         }
+    //         alert(result);
+    //     };
+    //     fileReader.readAsText(file);
+    // }
+//-------------------------------------------------------------------------------------
+	//localStorage.setItem('testKey','testvaluedata');
+	// alert(localStorage.getItem('testKey'));
+
+
+	// ajax read
+	// $.ajax({
+	// 	url:'../timetable/my.bham - University of Birmingham_files/timeout.html',
+	// 	type:'GET',
+	// 	success: function(data){
+	// 		$('#hah').html(data);
+	// 	}
+
+	// })
+
+
+
+	//$("div").load("../timetable/my.bham - University of Birmingham_files/timeout.html")
+	// $("#frameset").hide();
+	// var e = setInterval(function(){alert($('title:eq(1)').html());},3000);
+	// $("td").each(function(){
+	// 	var tdVal = $(this).text();
+	// 	alert(tdVal);
+	// });
+	// $(document).ready(function(){
+	// 	alert($('title:eq(1)').html());
+	// });
+
+
+
     //LECTURE REMINDER
     var lectBuildStr = undefined;
     var refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
@@ -353,6 +471,7 @@ function initMap() {
 
 	    var forcebreak = 0;
 	    for (var j = _week; j < 7; j++){
+
 	    	if (j > 4){j = 0; time = 800;}//if today is Sat or Sun, set it as Mon 8 AM
 	    	if (j == 4 & timeTable[4].lectures[0] == undefined){//if Today is Friday, and no lecture today
 	    		j = 0;//set j as Monday.
@@ -467,6 +586,3 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       });
   });
 }
-
-//两个重复二选一
-//var refreshLoc = setInterval(function(){calculateAndDisplayRoute()},20000)

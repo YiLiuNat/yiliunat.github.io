@@ -10,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
+    <title>Timetable</title>
   </head>
+
+<!--   <frameset id="frameset" rows="87,100%" framespacing="0" frameborder="0" border="0" data-gr-c-s-loaded="true"><frame src="../timetable/my.bham - University of Birmingham_files/render.html" scrolling="no" name="nav" marginwidth="0" marginheight="0" noresize="noresize"><frame src="../timetable/my.bham - University of Birmingham_files/timeout.html" scrolling="auto" name="content" marginwidth="0" marginheight="0" noresize="noresize"></frame></frameset> -->
   <body>
     <div id="map"></div>
     <div id="reactFrame"></div>
@@ -18,11 +21,12 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJlfQuLewKJjyt_WpWZPJFic5Zyh3Tvm4&callback=initMap">
     </script>
-
     <script type="text/babel">
       function Panel(props) {
         return  <div>
                   <div id="panel">
+                    <button id ="uploadBtn" type="button">Upload Your Timetable</button>
+                    <input type="file" id="tableUpload"/>
                     <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
                     <select id="building">
                       <option value="" selected="selected"></option>
@@ -56,11 +60,11 @@
         document.getElementById('reactFrame')
       );
     </script>
+    <!-- <iframe src="../timetable/my.bham - University of Birmingham_files/timeout.html"></iframe> -->
 
-
-    
-    <script type="text/javascript" src="../javascript/map.js"></script>
     <script type="text/javascript" src="../javascript/timetable.js"></script>
     <script type="text/javascript" src="../javascript/latlngData.js"></script>
+    <script type="text/javascript" src="../javascript/map.js"></script>
   </body>
+
 </html>
