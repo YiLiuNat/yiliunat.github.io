@@ -216,9 +216,6 @@ function initMap() {
 
 
     //GATE POP-UP START
-    //$("#building").change(function() {
-    
-    //有效的
     //document.getElementById('building').addEventListener('change',function(){
     var isRefresh = false;
     $('#building').change(function(){
@@ -234,7 +231,7 @@ function initMap() {
 		// }
 
 		switch ($("#building").val()){
-			case ("AstonWebbBBlock"):
+			case ("AstonW"):
 				mulGate = false;				
 				navDest = "52.449216, -1.931401";
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
@@ -272,14 +269,14 @@ function initMap() {
 				});
 				document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
-			case ("ComputerScience"):
+			case ("Comput"):
 				mulGate = false;
-				navDest = latlngData.ComputerScience;
+				navDest = latlngData.Comput;
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
-			case ("WatsonBuilding"):
+			case ("Watson"):
 				mulGate = false;
-				navDest = latlngData.WatsonBuilding;
+				navDest = latlngData.Watson;
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
 			case ("StaffHouse"):
@@ -318,9 +315,29 @@ function initMap() {
 				});
 				document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
-			case ("SportsandExercise"):
+			case ("Sports"):
 				mulGate = false;
-				navDest = latlngData.SportsandExercise;
+				navDest = latlngData.Sports;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("Gisber"):
+				mulGate = false;
+				navDest = latlngData.Gisber;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("Muirhe"):
+				mulGate = false;
+				navDest = latlngData.Muirhe;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("Metall"):
+				mulGate = false;
+				navDest = latlngData.Metall;
+				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				break;
+			case ("Univer"):
+				mulGate = false;
+				navDest = latlngData.Univer;
 				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
 				break;
 		}
@@ -339,6 +356,46 @@ function initMap() {
 	 //        	document.getElementById('building').addEventListener('change', onChangeHandler);
 	 //        }
 
+
+	var strDay = "";
+	function num2day(num){
+		switch(num){
+        	case (1): strDay = "Mon"; break;
+        	case (2): strDay = "Tue"; break;
+        	case (3): strDay = "Wed"; break;
+        	case (4): strDay = "Thu"; break;
+        	case (5): strDay = "Fri"; break;
+	    }
+	    return strDay;
+	}
+	//console.log(num2day(1));
+
+	var curTime = 0000;
+	function slot2time(slot){
+		switch(slot){
+        	case (1): curTime = 900; break;
+        	case (2): curTime = 930; break;
+        	case (3): curTime = 1000; break;
+        	case (4): curTime = 1030; break;
+        	case (5): curTime = 1100; break;
+        	case (6): curTime = 1130; break;
+        	case (7): curTime = 1200; break;
+        	case (8): curTime = 1230; break;
+        	case (9): curTime = 1300; break;
+        	case (10): curTime = 1330; break;
+        	case (11): curTime = 1400; break;
+        	case (12): curTime = 1430; break;
+        	case (13): curTime = 1500; break;
+        	case (14): curTime = 1530; break;
+        	case (15): curTime = 1600; break;
+        	case (16): curTime = 1630; break;
+        	case (17): curTime = 1700; break;
+        	case (18): curTime = 1730; break;
+        	case (19): curTime = 1800; break;
+        	case (20): curTime = 1830; break;
+		}
+		return curTime;
+	}
 
 	//READ TIMETABLE
 	//local storage read
@@ -361,7 +418,139 @@ function initMap() {
 	        	localStorage.removeItem("fileresult");
 	        	window.location.reload();
 	        });
-	        alert(localStorage.getItem("fileresult"));
+
+	        //alert(localStorage.getItem("fileresult"));
+	        var tableString = localStorage.fileresult;
+	        var numDay = 1; //start from Monday
+	        for(var j = numDay; j < 6; j++){
+	        	//number to day 1 -> Mon
+	        	num2day(j);
+	        	//strDay is "Mon", [1] means string after the first appearing of "Mon"
+	        	var strAftrDay = tableString.split(strDay)[1];
+	        	//Get the string (after "Mon") before "Tue"
+				num2day(j+1);
+	        	var strBtw12 = strAftrDay.split(strDay)[0];
+	        	//String of first row (timetable) on that day
+	        	var allDayLect = strBtw12.split("&nbsp;</td>\n</tr>")[0];
+	        	
+	        	var timeSlot = 0
+		          , colspan = 0
+		          , lectSplit = "";
+
+	        	for(var i = 0; lectSplit!=undefined; i++){
+		        	//loop every lecture on Mon(get all contents before each <!-END->)
+			        lectSplit = allDayLect.split("<!-- END OBJECT-CELL -->")[i]; 
+			        try{
+			        	// find out how many timeslots between last and this lecture
+			        	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
+			        	// calculate howmany timeslots total before this lecture start
+			        	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
+			        	slotCount = timeSlot + 1; // eg. 4 empty slots are 1100 actually
+				        // get time of that lecture
+				        var lectTime = slot2time(slotCount);
+				        // get name of that lecture
+				        var lectName = (lectSplit.split("<td align=\"left\">")[1]).split("</td>")[0];
+			        	// get building of that lecture
+			        	var lectBuildInLoop = (lectSplit.split("<td align=\"right\">")[2]).split("</td>")[0];
+			        	// short form of building name
+			        	var buildShort = ((lectBuildInLoop.split(/\s+/)).join("")).substr(0,6);
+			        	// get colspan number of that lecture (use to calc next lect's time)
+			        	colspan = (lectSplit.split("colspan=\"")[1]).substr(0,1);
+			        	// change the timetable array
+			        	timeTable[j-1].lectures[i].lect = lectName;
+			        	timeTable[j-1].lectures[i].time = lectTime;
+			        	timeTable[j-1].lectures[i].location = buildShort;
+
+			        	//console.log("colspan: " + colspan);
+			        	//console.log("time before the lecture: " + timeBefoLect);
+			        	console.log(lectTime);
+			        	console.log(lectName);
+			        	console.log(lectBuildInLoop);
+			        	//console.log(buildShort);
+			        }catch(e){
+			        	console.log("All today's lectures captured");
+			        	break;
+			        }
+		    	}
+	        }
+
+	        // var afterMon = tableString.split("Mon")[1];
+	        // var monAll = afterMon.split("Tue")[0];//String before "Tue"
+	        // var mon = monAll.split("&nbsp;</td>\n</tr>")[0];//String of first line in timetable
+	        //console.log(mon);
+
+
+	        // var timeSlot = 0
+	        //   , curTime = 0000
+	        //   , colspan = 0
+	        //   , lectSplit = "";
+
+
+	     //    for(var i = 0; lectSplit!=undefined; i++){
+	     //    	//loop every lecture on Mon(get all contents before each <!-END->)
+		    //     lectSplit = mon.split("<!-- END OBJECT-CELL -->")[i]; 
+		    //     try{
+		    //     	// find out how many timeslots between last and this lecture
+		    //     	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
+		    //     	// calculate howmany timeslots total before this lecture start
+		    //     	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
+		    //     	slot2time = timeSlot + 1; // eg. 4 empty slots are 1100 actually
+		    //     	switch(slot2time){
+			   //      	case (1): curTime = 900; break;
+			   //      	case (2): curTime = 930; break;
+			   //      	case (3): curTime = 1000; break;
+			   //      	case (4): curTime = 1030; break;
+			   //      	case (5): curTime = 1100; break;
+			   //      	case (6): curTime = 1130; break;
+			   //      	case (7): curTime = 1200; break;
+			   //      	case (8): curTime = 1230; break;
+			   //      	case (9): curTime = 1300; break;
+			   //      	case (10): curTime = 1330; break;
+			   //      	case (11): curTime = 1400; break;
+			   //      	case (12): curTime = 1430; break;
+			   //      	case (13): curTime = 1500; break;
+			   //      	case (14): curTime = 1530; break;
+			   //      	case (15): curTime = 1600; break;
+			   //      	case (16): curTime = 1630; break;
+			   //      	case (17): curTime = 1700; break;
+			   //      	case (18): curTime = 1730; break;
+			   //      	case (19): curTime = 1800; break;
+			   //      	case (20): curTime = 1830; break;
+			   //      }
+
+			   //      // get time of that lecture
+			   //      var lectTime = curTime;
+			   //      // get name of that lecture
+			   //      var lectName = (lectSplit.split("<td align=\"left\">")[1]).split("</td>")[0];
+		    //     	// get colspan number of that lecture (use to calc next lect's time)
+		    //     	colspan = (lectSplit.split("colspan=\"")[1]).substr(0,1);
+		        	
+		    //     	//console.log("colspan: " + colspan);
+		    //     	//console.log("time before the lecture: " + timeBefoLect);
+		    //     	console.log(lectTime);
+		    //     	console.log(lectName);
+
+		    //     }catch{
+		    //     	console.log("colspanGet failed");
+		    //     }
+		    // }
+	        // for (var i = 0; ){
+
+	        // }
+	        //console.log(lectSplit);
+	        
+	        //var tableStringify = JSON.stringify(localStorage.fileresult);
+	        //var tableString = JSON.parse("{id:'1'}");
+	        //console.log(tableStringify);
+	        // try{
+	        // 	//var tableParse = JSON.parse(tableStringify);
+	        	
+
+	        // 	//console.log(tableParse);
+	        // } catch (e) {
+	        // 	console.log("JSON parse failed: " + e);
+	        // }
+
 	    }
 	}
 	isLoad();
@@ -465,7 +654,7 @@ function initMap() {
 		  , minutes = date.getMinutes()
 		  , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
 		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
-		  , _week = 0;//week - 1; //First element in JS is [0]
+		  , _week = 1;//week - 1; //First element in JS is [0]
 		if(minutes < 10){minutes = '0'+minutes;}
 		//getMinutes() can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
 
@@ -489,7 +678,11 @@ function initMap() {
 			   		  , lectBuildStr = timeTable[j].lectures[i].location;
 
 		    		$("#lecture").html('<span>' + lectStr + '</span>');//show lecture name
-		    		$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
+		    		if(lectTimeStr.length < 4){
+		    			$("#time").html('<span>0' + lectTimeStr.substring(0,1) + ':' + lectTimeStr.substring(1,3) + '</span>');
+		    		}else{
+		    			$("#time").html('<span>' + lectTimeStr.substring(0,2) + ':' + lectTimeStr.substring(2,4) + '</span>');
+		    		}
 					$("#building").val(lectBuildStr);//Change the OPTION value
 					//alert(timeTable[j].lectures[i].location);
 					$("#building").change();
