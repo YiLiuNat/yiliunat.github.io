@@ -68,7 +68,7 @@ html {
   width: 0.4rem;
   height: 0.45rem;
   right: 0.2rem;
-  background: url(../img/calBtn.png) repeat;
+  background: url(../img/calBtn.png) no-repeat;
   background-size: 0.4rem 0.45rem;
   border: 0;
   /*opacity: 0.7;*/
