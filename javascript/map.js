@@ -406,13 +406,13 @@ function initMap() {
     var fileresult = localStorage.getItem("fileresult");//file content in storage(string）
     function isLoad(){
 	    if(filename && fileresult){//if already have this file in localstorage
-	        //storageFile：通过localStorage中的文件内容和文件名构建的File对象
-	        var storageFile = new File([fileresult], {"type":"text/plain"});//File继承自Blob，可以用Blob的构造函数
+	        //storageFile：use localStorage to create File object
+	        var storageFile = new File([fileresult], {"type":"text/plain"});
 	        Object.defineProperty(storageFile,'name',{value:filename});
 	        
 	        $("#uploadBtn").text("Timetable Loaded");
 	        $("#uploadBtn").css("width","3.4rem");
-	        $("#panel").append("<button id ='clear' type='button'>&#10005;</button>");
+	        $("#sideBar").append("<button id ='clear' type='button'>Delete this timetable</button>");
 	        $("#clear").click(function(){
 	        	localStorage.removeItem("filename");
 	        	localStorage.removeItem("fileresult");
@@ -473,84 +473,6 @@ function initMap() {
 			        }
 		    	}
 	        }
-
-	        // var afterMon = tableString.split("Mon")[1];
-	        // var monAll = afterMon.split("Tue")[0];//String before "Tue"
-	        // var mon = monAll.split("&nbsp;</td>\n</tr>")[0];//String of first line in timetable
-	        //console.log(mon);
-
-
-	        // var timeSlot = 0
-	        //   , curTime = 0000
-	        //   , colspan = 0
-	        //   , lectSplit = "";
-
-
-	     //    for(var i = 0; lectSplit!=undefined; i++){
-	     //    	//loop every lecture on Mon(get all contents before each <!-END->)
-		    //     lectSplit = mon.split("<!-- END OBJECT-CELL -->")[i]; 
-		    //     try{
-		    //     	// find out how many timeslots between last and this lecture
-		    //     	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
-		    //     	// calculate howmany timeslots total before this lecture start
-		    //     	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
-		    //     	slot2time = timeSlot + 1; // eg. 4 empty slots are 1100 actually
-		    //     	switch(slot2time){
-			   //      	case (1): curTime = 900; break;
-			   //      	case (2): curTime = 930; break;
-			   //      	case (3): curTime = 1000; break;
-			   //      	case (4): curTime = 1030; break;
-			   //      	case (5): curTime = 1100; break;
-			   //      	case (6): curTime = 1130; break;
-			   //      	case (7): curTime = 1200; break;
-			   //      	case (8): curTime = 1230; break;
-			   //      	case (9): curTime = 1300; break;
-			   //      	case (10): curTime = 1330; break;
-			   //      	case (11): curTime = 1400; break;
-			   //      	case (12): curTime = 1430; break;
-			   //      	case (13): curTime = 1500; break;
-			   //      	case (14): curTime = 1530; break;
-			   //      	case (15): curTime = 1600; break;
-			   //      	case (16): curTime = 1630; break;
-			   //      	case (17): curTime = 1700; break;
-			   //      	case (18): curTime = 1730; break;
-			   //      	case (19): curTime = 1800; break;
-			   //      	case (20): curTime = 1830; break;
-			   //      }
-
-			   //      // get time of that lecture
-			   //      var lectTime = curTime;
-			   //      // get name of that lecture
-			   //      var lectName = (lectSplit.split("<td align=\"left\">")[1]).split("</td>")[0];
-		    //     	// get colspan number of that lecture (use to calc next lect's time)
-		    //     	colspan = (lectSplit.split("colspan=\"")[1]).substr(0,1);
-		        	
-		    //     	//console.log("colspan: " + colspan);
-		    //     	//console.log("time before the lecture: " + timeBefoLect);
-		    //     	console.log(lectTime);
-		    //     	console.log(lectName);
-
-		    //     }catch{
-		    //     	console.log("colspanGet failed");
-		    //     }
-		    // }
-	        // for (var i = 0; ){
-
-	        // }
-	        //console.log(lectSplit);
-	        
-	        //var tableStringify = JSON.stringify(localStorage.fileresult);
-	        //var tableString = JSON.parse("{id:'1'}");
-	        //console.log(tableStringify);
-	        // try{
-	        // 	//var tableParse = JSON.parse(tableStringify);
-	        	
-
-	        // 	//console.log(tableParse);
-	        // } catch (e) {
-	        // 	console.log("JSON parse failed: " + e);
-	        // }
-
 	    }
 	}
 	isLoad();
@@ -575,6 +497,16 @@ function initMap() {
     	loadFile(this.files[0]);
     });
 
+    //SIDE BAR ----------------------------------------
+    $('#sideBarBtn').click(function(){
+    	$('#sideBar').animate({left:'0'});
+    });
+    $('#sideBarClose').click(function(){
+    	$('#sideBar').animate({left:'-100%'});
+    });
+    $('#calBtn').click(function(){
+    	$('#cal').toggle(200);
+    })
 
 
 	//-----------------------------------	
@@ -654,7 +586,7 @@ function initMap() {
 		  , minutes = date.getMinutes()
 		  , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
 		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
-		  , _week = 1;//week - 1; //First element in JS is [0]
+		  , _week = 3;//week - 1; //First element in JS is [0]
 		if(minutes < 10){minutes = '0'+minutes;}
 		//getMinutes() can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
 
@@ -677,7 +609,7 @@ function initMap() {
 			   		  , lectTimeStr = timeTable[j].lectures[i].time.toString()
 			   		  , lectBuildStr = timeTable[j].lectures[i].location;
 
-		    		$("#lecture").html('<span>' + lectStr + '</span>');//show lecture name
+		    		$("#lecture").html('<span id="lectureSpan">' + lectStr + '</span>');//show lecture name
 		    		if(lectTimeStr.length < 4){
 		    			$("#time").html('<span>0' + lectTimeStr.substring(0,1) + ':' + lectTimeStr.substring(1,3) + '</span>');
 		    		}else{

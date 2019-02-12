@@ -25,27 +25,32 @@
       function Panel(props) {
         return  <div>
                   <div id="panel">
-                    <button id ="uploadBtn" type="button">Upload Your Timetable</button>
-                    <input type="file" id="tableUpload"/>
-                    <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
-                    <select id="building">
-                      <option value="" selected="selected"></option>
-                      <option value="AstonW">Aston Webb B Block</option>
-                      <option value="AstonWebbGreatHall">Aston Webb Great Hall</option>
-                      <option value="Comput">Computer Science Building</option>
-                      <option value="Gisber">Gisbert Kapp Building</option>
-                      <option value="Metall">Metallurgy and Materials</option>
-                      <option value="Muirhe">Muirhead Tower</option>
-                      <option value="Univer">University House</option>
-                      <option value="Watson">Watson Building (R15)</option>
-                      <option value="StaffHouse">Staff House (R24)</option>
-                      <option value="Library">Library</option>
-                      <option value="Sports">Sports and Exercise</option>
-                    </select>
+                    <div id="btnsFrame">
+                      <button id = "sideBarBtn"></button>
+                      <button id = "calBtn"></button>
+                      <div id = "cal"></div>
+                      <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
+                      <select id="building">
+                        <option value="" selected="selected"></option>
+                        <option value="AstonW">Aston Webb B Block</option>
+                        <option value="AstonWebbGreatHall">Aston Webb Great Hall</option>
+                        <option value="Comput">Computer Science Building</option>
+                        <option value="Gisber">Gisbert Kapp Building</option>
+                        <option value="Metall">Metallurgy and Materials</option>
+                        <option value="Muirhe">Muirhead Tower</option>
+                        <option value="Univer">University House</option>
+                        <option value="Watson">Watson Building (R15)</option>
+                        <option value="StaffHouse">Staff House (R24)</option>
+                        <option value="Library">Library</option>
+                        <option value="Sports">Sports and Exercise</option>
+                      </select>
+                    </div>
+                    
                     <div id="reminder">
 	                    <span id="yourNextText">Your Next Lecture</span>
 	                    <div id="lecture"><span>Human Computer Interaction</span></div>
 	                    <div id="time">12:00</div>
+                      
                 	</div>
                   </div>
                   <div id="gatePop">
@@ -53,7 +58,17 @@
                     <button id="gateA"></button>
                     <button id="gateB"></button>
                   </div>
+                  <div id="sideBar">
+                    <button id="sideBarClose">&#10005;</button>
+                    <div id="sideBarContent">
+                      <span id="settings">Settings</span>
+                      <div id="sideBarLine"></div>
+                      <button id="uploadBtn" type="button">Upload Your Timetable</button>
+                      <input type="file" id="tableUpload"/>
+                    </div>
+                  </div>
                 </div>
+
                 ;
       }
 
