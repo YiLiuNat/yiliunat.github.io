@@ -357,6 +357,23 @@ function initMap() {
 	 //        }
 
 
+	 	//Get Date
+	function dateTrans(){
+		var date = new Date()
+		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
+		  , _week = week-1; //First value in JS is [0];
+		return _week;
+	}
+
+	//Get Time
+	function timeTrans(){
+		var date = new Date()
+		  , minutes = date.getMinutes();
+		if(minutes < 10){minutes = '0'+minutes;} //e.g 20:03 is 03 rather than 3
+		var time = parseInt(date.getHours()+''+minutes);//Get current time (returns int eg1100)
+		return time;
+	}
+
 	var strDay = "";
 	function num2day(num){
 		switch(num){
@@ -397,6 +414,8 @@ function initMap() {
 		return curTime;
 	}
 
+	//initial this global var
+	var refreshTimetable = undefined;
 	//READ TIMETABLE
 	//local storage read
     $('#uploadBtn').click(function(){
@@ -473,9 +492,18 @@ function initMap() {
 			        }
 		    	}
 	        }
+	        //LECTURE REMINDER
+    		refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
+			lecture(dateTrans(),timeTrans());//dateTrans() timeTrans()
+	    }else{
+	    	//if no timetable loaded
+	    	$("#panel").css("height","2.7rem");
+	    	$("#yourNextText").html("<span id=\"helpText\">Try to upload your <p>timetable here</p></span><div id=\"arrow\"></div>");
+	    	$("#lecture").html("<span></span>");
 	    }
 	}
 	isLoad();
+	//File upload function
     function loadFile(file){
         var fileReader = new FileReader();
         fileReader.onload = function(){
@@ -504,10 +532,6 @@ function initMap() {
     $('#sideBarClose').click(function(){
     	$('#sideBar').animate({left:'-100%'});
     });
-    $('#calBtn').click(function(){
-    	$('#cal').toggle(200);
-    })
-
 
 	//-----------------------------------	
     // $('#uploadBtn').click(function(){
@@ -577,33 +601,37 @@ function initMap() {
 	// });
 
 
+	
 
     //LECTURE REMINDER
     var lectBuildStr = undefined;
-    var refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
-    function lecture(){
-		var date = new Date()
-		  , minutes = date.getMinutes()
-		  , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
-		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
-		  , _week = 3;//week - 1; //First element in JS is [0]
-		if(minutes < 10){minutes = '0'+minutes;}
-		//getMinutes() can only get single number when minute smaller than 10, eg 20:03 = 3 rather than 03
-
+    //This function using in isLoad().
+    function lecture(_week,time){
+		// var date = new Date()
+		// , minutes = date.getMinutes()
+		// , time = parseInt(date.getHours()+''+minutes)//Get current time (returns int eg1100)
+		// , week = date.getDay()//Get the day of week (returns num eg1,2,3)
+		// , _week = week - 1; //First element in JS is [0]
+		//if(minutes < 10){minutes = '0'+minutes;}
 	    var forcebreak = 0;
 	    for (var j = _week; j < 7; j++){
-
-	    	if (j > 4){j = 0; time = 800;}//if today is Sat or Sun, set it as Mon 8 AM
+	    	//if (j == -1){j = 0; time = 800;}//if today is Sun, set it as Mon 8AM
+	    	if (j > 4 || j == -1){//if today is Sat/Sun, set it as Mon 8 AM
+	    		j = 0; 
+	    		time = 800;
+	    		$("#yourNextText").html('Your Monday\'s Lecture');
+	    	}
 	    	if (j == 4 & timeTable[4].lectures[0] == undefined){//if Today is Friday, and no lecture today
 	    		j = 0;//set j as Monday.
 	    		time = 800;
+	    		$("#yourNextText").html('Your Monday\'s Lecture');
 	    	}
-	    	
 	    	if (timeTable[j].lectures[0] !== undefined){ //if there's lecture on jst day 
 	    		var i = 0;
 	    		try{
-		    		while(time > timeTable[j].lectures[i].time){ //comapre current time with the first lecture's time
+		    		while(time >= timeTable[j].lectures[i].time){ //comapre current time with the first lecture's time
 			    		i += 1;//if lecture's time past, check next lecture's time.
+						
 			   		}
 			   		var lectStr = timeTable[j].lectures[i].lect
 			   		  , lectTimeStr = timeTable[j].lectures[i].time.toString()
@@ -621,72 +649,109 @@ function initMap() {
 		    		break;
 		    	}catch(err){//if all today's lecture past, continue the loop.
 		    		time = 800; // reset time as 0, make sure the time always doesn't past the next lecture's.
-		    		if (j == 4){j = -1;}// If today is Friday, set j as Monday (-1, loop will make j+1 = 0).
+		    		$("#yourNextText").html('Your Tomorrow\'s Lecture');
+		    		if (j == 4){// If today is Friday, set j as Monday (-1, loop will make j+1 = 0).
+		    			j = -1;
+		    			$("#yourNextText").html('Your Monday\'s Lecture');
+		    		}
 		    	}
 	    	}
 	    	forcebreak += 1;
 	    	if(forcebreak == 14){forcebreak = 0; alert("Timetable Error"); break;}//break the loop in case of infinity
 	    }
 	};
-	lecture();
 	$("#building").click(function(){//if user changed the selection,
-		clearInterval(refreshTimetable);//then clear the timetable refresh interval
+		try{
+			clearInterval(refreshTimetable);//then clear the timetable refresh interval
+		}catch{
+		}
 		var refreshCustomLoca = setInterval(function(){
 			isRefresh = true;//State this is a auto refresh(cancel the animation)
 			$("#building").change();//set a new interval that triggers location refresh
 		}, 15000);
 	});
-	
-	//alert(lectBuildStr);
-	// if ($("#building").val() !== lectBuildStr){
-	// 	clearInterval(refreshTimetable);
-	// 	alert($("#building").click());
-	// }
-	
 
+	//Calendar ----------------------------------------
+    function inputTime(){
+    	var time = $('#setTime').val();
+    	return time;
+    }
 
-    // try{
-	//     while(time > _timetable.lectures[i].time){ //if lectures[i] is defined, show ongoing lecture
-	//     	i = i+1;
-	//     }
-	//     $("#lecture").append('<span>' + _timetable.lectures[i].lect + '</span>');
-	// }catch(err){//return err means lectures[i] is undefined
-	// 	try{//show tomorrow's lecture
-	// 		$("#lecture").append('<span>' + timeTable[week].lectures[0].lect + '</span>');
-	// 	}catch(err){//return err means no 'tomorrow' in your list
-	// 		try{//try tomorrow+1
-	// 			$("#lecture").append('<span>' + timeTable[week+1].lectures[0].lect + '</span>');
-	// 		}catch(err){
-	// 			try{//try tomorrow+2
-	// 				$("#lecture").append('<span>' + timeTable[week+2].lectures[0].lect + '</span>');
-	// 			}catch(err){//show Monday's first lecture then.
-	// 				$("#lecture").append('<span>' + _timetableMon.lectures[0].lect + '</span>');
-	// 			}
-	// 		}
-			
-	// 	}
-	// }
-	
-    //$("#lecture").append('<span>' + _timetableMon.lectures[0].lect + '</span>');
-    //$("#lecture").append('<span>' + _timetable.lectures[i].lect + '</span>');
-    
-	   //  if(_timetable.lectures[i].lect == undefined){ //if no more lectures today
-	   //  	if(timeTable[_week+1] == undefined){//and no 'next day' in the list, then return Monday's first lec
-	   //  		$("#lecture").append('<span>' + _timetableMon.lectures[0].lect + '</span>');
-	   //  	}
-	   //  	else{//then return next day's first lec
-	   //  		$("#lecture").append('<span>' + timeTable[_week+1].lectures[0].lect + '</span>');
-	   //  	}
-	   //  }
-	
-    // else{//means today still has left lectures, just return next lecture
-    // 	$("#lecture").append('<span>' + _timetable.lectures[i].lect + '</span>');
-    // }
+    var defaultDay = dateTrans();
+    var defaultTime = timeTrans();
+    $('#setTime').keyup(function(enter){
+    	if(enter.keyCode == 13){//if user type enter in search bar
+    		try{
+    			clearInterval(refreshTimetable);
+    		}catch{}
+    		if(defaultDay == -1 || defaultDay == 5){
+    			defaultDay == 0;
+    		}
+    		if(inputTime().substr(inputTime().length-2,inputTime().length) > 59 || inputTime() > 2359){
+    			alert('Please input a valid time. eg. 0800, 1100, 1400');
+    		}else{
+	    		$("#yourNextText").html('Your Next Lecture');
+	    		defaultTime = inputTime();
+	    		lecture(defaultDay,defaultTime);
+	    	}
+    	}
+    })
 
-    //$("#lecture").append('<span>' + _timetable.lectures[0].lect + time +'</span>');
-
-
+    $('#calBtn').click(function(){
+    	if(localStorage.getItem("filename") && localStorage.getItem("fileresult")){
+    		$('#cal').toggle(200);
+    	}else{
+    		alert("Upload Your Timetable First!")
+    	}
+    })
+    $('#mondiv').click(function(){
+    	try{
+    		clearInterval(refreshTimetable);
+    	}catch{}
+    	$('#setTime').val('0800');
+		$("#yourNextText").html('Your Next Lecture');
+    	defaultDay = 0;
+    	lecture(defaultDay,800);
+    })
+    $('#tuediv').click(function(){
+    	try{
+    		clearInterval(refreshTimetable);
+    	}catch{}
+    	$('#setTime').val('0800');
+    	$("#yourNextText").html('Your Next Lecture');
+    	defaultDay = 1;
+    	lecture(defaultDay,800);
+    })
+    $('#weddiv').click(function(){
+    	try{
+    		clearInterval(refreshTimetable);
+    	}catch{}
+    	$('#setTime').val('0800');
+    	$("#yourNextText").html('Your Next Lecture');
+    	defaultDay = 2;
+    	lecture(defaultDay,800);
+    })
+    $('#thudiv').click(function(){
+    	try{
+    		clearInterval(refreshTimetable);
+    	}catch{}
+    	$('#setTime').val('0800');
+    	$("#yourNextText").html('Your Next Lecture');
+    	defaultDay = 3;
+    	lecture(defaultDay,800);
+    })
+    $('#fridiv').click(function(){
+    	try{
+    		clearInterval(refreshTimetable);
+    	}catch{}
+    	$('#setTime').val('0800');
+    	$("#yourNextText").html('Your Next Lecture');
+    	defaultDay = 4;
+    	lecture(defaultDay,800);
+    })
 }
+
+
 
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {

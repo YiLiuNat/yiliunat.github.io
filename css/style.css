@@ -41,6 +41,9 @@ html {
   background-color: white;
   /*background-color: grey;*/
   -webkit-box-sizing: border-box;
+  -moz-box-shadow:0px 1px 20px #6B6B6B;
+  -webkit-box-shadow:0px 1px 20px #6B6B6B;
+  box-shadow:0px 1px 10px #6B6B6B;
 }
 
 #btnsFrame {
@@ -82,12 +85,155 @@ html {
   right: 0rem;
   margin-right: -0.2rem;
   width: 2.2rem;
-  height: 4rem;
+  height: 3.6rem;
   border: 1px solid #C2C2C2;
   background-color: white;
   border-radius: 0.1rem;
-  z-index: 9;
+  z-index: 8;
   display: none;
+}
+
+#setTime {
+  position: absolute;
+  top: 0.1rem;
+  left: 50%;
+  margin-left: -0.95rem;
+  width: 1.9rem;
+  height: 0.5rem;
+  border: 2px solid #C2C2C2;
+  border-radius: 0.1rem;
+  font-size: 0.25rem;
+  text-align: center;
+}
+
+#mondiv {
+  position: absolute;
+  top: 0.6rem;
+  left: 0;
+  width: 2.2rem;
+  height: 0.6rem;
+}
+
+#monspan {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 0.25rem;
+  width: 2.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+
+#monline {
+  position: absolute;
+  bottom: 0;
+  width: 1.8rem;
+  height: 1px;
+  left: 50%;
+  margin-left: -0.9rem;
+  background-color: #D9D9D9
+}
+
+#tuediv {
+  position: absolute;
+  top: 1.2rem;
+  left: 0;
+  width: 2.2rem;
+  height: 0.6rem;
+}
+
+#tuespan {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 0.25rem;
+  width: 2.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+
+#tueline {
+  position: absolute;
+  bottom: 0;
+  width: 1.8rem;
+  height: 1px;
+  left: 50%;
+  margin-left: -0.9rem;
+  background-color: #D9D9D9
+}
+
+#weddiv {
+  position: absolute;
+  top: 1.8rem;
+  left: 0;
+  width: 2.2rem;
+  height: 0.6rem;
+}
+
+#wedspan {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 0.25rem;
+  width: 2.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+
+#wedline {
+  position: absolute;
+  bottom: 0;
+  width: 1.8rem;
+  height: 1px;
+  left: 50%;
+  margin-left: -0.9rem;
+  background-color: #D9D9D9
+}
+
+#thudiv {
+  position: absolute;
+  top: 2.4rem;
+  left: 0;
+  width: 2.2rem;
+  height: 0.6rem;
+}
+
+#thuspan {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 0.25rem;
+  width: 2.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+}
+
+#thuline {
+  position: absolute;
+  bottom: 0;
+  width: 1.8rem;
+  height: 1px;
+  left: 50%;
+  margin-left: -0.9rem;
+  background-color: #D9D9D9
+}
+
+#fridiv {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  width: 2.2rem;
+  height: 0.6rem;
+}
+
+#frispan {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 0.25rem;
+  width: 2.2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
 }
 
 #sideBar {
@@ -96,9 +242,9 @@ html {
   height: 100%;
   left: -100%;
   background-color: white;
-  -moz-box-shadow:1px 0px 20px #6B6B6B;
-  -webkit-box-shadow:1px 0px 20px #6B6B6B;
-  box-shadow:1px 0px 20px #6B6B6B;
+  -moz-box-shadow:1px 0px 10px #6B6B6B;
+  -webkit-box-shadow:1px 0px 10px #6B6B6B;
+  box-shadow:1px 0px 10px #6B6B6B;
 }
 
 #sideBarClose {
@@ -123,6 +269,7 @@ html {
 }
 
 #settings {
+  font-family: 'Mukta', sans-serif;
   position: absolute;
   width: 2rem;
   height: 0.7rem;
@@ -143,7 +290,8 @@ html {
 }
 
 #uploadBtn {
-  font-size: 0.25rem;
+  font-family: 'Mukta', sans-serif;
+  font-size: 0.29rem;
   position: absolute;
   left: 50%;
   margin-left: -1.7rem;
@@ -156,6 +304,7 @@ html {
 }
 
 #clear {
+  font-family: 'Mukta', sans-serif;
   font-size: 0.25rem;
   position: absolute;
   left: 50%;
@@ -180,6 +329,31 @@ html {
   border: 1px solid grey;
   border-radius: 0.1rem;
   display: none;
+}
+
+#helpText {
+  font-family: 'Courgette', sans-serif;
+  font-size: 0.4rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2.5rem;
+  top: 0.3rem;
+  width: 5rem;
+  height: 1rem;
+  line-height: 0.16rem;
+  text-align: center;
+}
+
+#arrow {
+  position: absolute;
+  left: -1rem;
+  top: -0.1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  background: url(../img/arrow.png) no-repeat;
+  background-position: center center;
+  background-size: 1.5rem 1.5rem;
+  border: 0;
 }
 
  #search {
@@ -219,19 +393,21 @@ html {
 }
 
  #yourNextText {
-  font-size: 0.32rem;
+  font-family: 'Mukta', sans-serif;
+  font-size: 0.38rem;
   position: absolute;
   left: 50%;
-  margin-left: -1.3rem;
-  top: 0.1rem;
-  width: 2.6rem;
+  margin-left: -2rem;
+  top: 0rem;
+  width: 4rem;
   height: 1rem;
   text-align: center;
  }
 
 #lecture {
   position: absolute;
-  font-size: 0.2rem;
+  font-family: 'Mukta', sans-serif;
+  font-size: 0.26rem;
   text-align: center;
   top: 0.5rem;
   width: 5rem;
@@ -243,6 +419,7 @@ html {
 #lectureSpan {
   position: absolute;
   top: 0rem;
+  font-family: 'Mukta', sans-serif;
   text-align: center;
   vertical-align: middle;
   width: 4.5rem;
@@ -253,6 +430,7 @@ html {
 }
 
 #time {
+  font-family: 'Mukta', sans-serif;
   position: relative;
   font-size: 0.8rem;
   text-align: center;

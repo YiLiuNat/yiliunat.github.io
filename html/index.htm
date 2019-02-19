@@ -8,6 +8,8 @@
     <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Mukta' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8"/>
     <title>Timetable</title>
@@ -18,9 +20,7 @@
     <div id="map"></div>
     <div id="reactFrame"></div>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJlfQuLewKJjyt_WpWZPJFic5Zyh3Tvm4&callback=initMap">
-    </script>
+
     <script type="text/babel">
       function Panel(props) {
         return  <div>
@@ -28,7 +28,16 @@
                     <div id="btnsFrame">
                       <div id = "sideBarBtn"></div>
                       <div id = "calBtn"></div>
-                      <div id = "cal"></div>
+                      <div id = "cal">
+                        <input id="setTime" type="text" placeholder="Enter a time"></input>
+                        <div id="mondiv">
+                          <span id="monspan">Mon</span><div id="monline"></div>
+                        </div>
+                        <div id="tuediv"><span id ="tuespan">Tue</span><div id ="tueline"></div></div>
+                        <div id="weddiv"><span id ="wedspan">Wed</span><div id ="wedline"></div></div>
+                        <div id="thudiv"><span id ="thuspan">Thur</span><div id ="thuline"></div></div>
+                        <div id="fridiv"><span id ="frispan">Fri</span></div>
+                      </div>
                       <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
                       <select id="building">
                         <option value="" selected="selected"></option>
@@ -45,12 +54,10 @@
                         <option value="Sports">Sports and Exercise</option>
                       </select>
                     </div>
-                    
                     <div id="reminder">
 	                    <span id="yourNextText">Your Next Lecture</span>
-	                    <div id="lecture"><span>Human Computer Interaction</span></div>
-	                    <div id="time">12:00</div>
-                      
+	                    <div id="lecture"><span>You Don't Have Any Lectures</span></div>
+	                    <div id="time"></div>
                 	</div>
                   </div>
                   <div id="gatePop">
@@ -83,6 +90,7 @@
     <script type="text/javascript" src="../javascript/timetable.js"></script>
     <script type="text/javascript" src="../javascript/latlngData.js"></script>
     <script type="text/javascript" src="../javascript/map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJlfQuLewKJjyt_WpWZPJFic5Zyh3Tvm4&callback=initMap"></script>
   </body>
 
 </html>
