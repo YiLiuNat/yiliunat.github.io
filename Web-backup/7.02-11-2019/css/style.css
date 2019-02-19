@@ -1,0 +1,187 @@
+body {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  -webkit-text-size-adjust:100%!important;
+  -webkit-touch-callout: none !important; 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;
+  
+}
+
+html {
+  font-size: 100px;
+  -ms-touch-action: none;
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+#map {
+  position: absolute;
+  left: 0px;
+  bottom: 0rem;
+  height: 9rem;  
+  width: 100%;  
+ }
+
+#panel {
+  position: absolute;
+  left: 0px;
+  top: 0rem;
+  height: 4rem;  
+  width: 100%;
+  background-color: white;
+  /*background-color: grey;*/
+  -webkit-box-sizing: border-box;
+}
+
+#uploadBtn {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+}
+
+#clear {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: 1.5rem;
+  top: 0.4rem;
+  width: 0.5rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+}
+
+#tableUpload {
+  font-size: 0.2rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+  display: none;
+}
+
+ #search {
+  font-size: 0.2rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.4rem;
+  width: 4rem;
+  height: 0.4rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+  display: none;
+ }
+
+ #building {
+  font-size: 0.3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -2rem;
+  top: 0.9rem;
+  width: 4rem;
+  height: 0.4rem;
+  /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAElBMVEUAAABmZmZtbW1mZmZmZmZmZmaPZyHQAAAABXRSTlMA1RV/I8PMOsoAAABZSURBVBjTVZDRCcAwCAWlIwT6n+zQTtAJSvbfJfA4P06IohfUZ32zsOupd3Sydq1/Au6RF0s1LgAPIFBKpAJqEBTQKKARwIm/uQGtPVTreFFJkDjJ1kF0qgMeaxCbAVusmQAAAABJRU5ErkJggg==) no-repeat center center;*/
+  background-size: 0.24rem 0.24rem;
+  border: 1px solid grey;
+  border-radius: 0.1rem;
+ }
+
+#reminder {
+  position: absolute;
+  top: 1.5rem;
+  height: 3rem;
+  width: 5.6rem;
+  left: 50%;
+  margin-left: -2.8rem;
+}
+
+ #yourNextText {
+  font-size: 0.32rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.3rem;
+  top: 0.1rem;
+  width: 2.6rem;
+  height: 1rem;
+  text-align: center;
+ }
+
+#lecture {
+  position: relative;
+  font-size: 0.2rem;
+  text-align: center;
+  top: 0.5rem;
+}
+
+#time {
+  position: relative;
+  font-size: 0.8rem;
+  text-align: center;
+  top: 0.5rem;
+}
+
+ #gatePop {
+  position: absolute;
+  left: 0rem;
+  bottom: -3rem;
+  height: 3rem;
+  width: 100%;
+  background-color: white;
+ }
+
+ #whichGate {
+  position: absolute;
+  font-size: 0.4rem;
+  width: 5rem;
+  height: 1rem;
+  left: 50%;
+  margin-left: -2.5rem;
+  top: 0.2rem;
+ }
+
+ #gateA {
+  position: absolute;
+  width: 2.5rem;
+  height: 1.5rem;
+  left: 0.5rem;
+  top: 1rem;
+  background-color: grey;
+ }
+
+#gateB {
+  position: absolute;
+  width: 2.5rem;
+  height: 1.5rem;
+  right: 0.5rem;
+  top: 1rem;
+  background-color: grey;
+ }
+
+ #pic {
+  position: absolute;
+  width: 2.5rem;
+  height: 1.5rem;
+  right: 0rem;
+  top: 0rem;
+ }

@@ -1,0 +1,36 @@
+<!--       <frameset rows="87,100%" framespacing="0" frameborder="0" border="0" data-gr-c-s-loaded="true"><frame src="./my.bham - University of Birmingham_files/render.html" scrolling="no" name="nav" marginwidth="0" marginheight="0" noresize="noresize"><frame src="../timetable/my.bham - University of Birmingham_files/timeout.html" scrolling="auto" name="content" marginwidth="0" marginheight="0" noresize="noresize"></frame></frameset> -->
+<!--     <iframe style="height: 100%; width: 100%;" src="../timetable/my.bham - University of Birmingham_files/render.html"></iframe> -->
+ <!-- <iframe src="../timetable/my.bham - University of Birmingham_files/timeout.html"></iframe> -->
+<input type="file" id="jobData" onchange="loadFile(this.files[0])">
+
+<script>
+    var filename_1 = localStorage.getItem("filename_1");//存在localStorage中的文件名
+    var fileresult_1 = localStorage.getItem("fileresult_1");//存在localStorage中的文件内容（string）
+    //若localStorage已有该项
+    if(filename_1 && fileresult_1){
+        //storageFile：通过localStorage中的文件内容和文件名构建的File对象
+        var storageFile = new File([fileresult_1], {"type":"text/plain"});//File继承自Blob，可以用Blob的构造函数
+        Object.defineProperty(storageFile,'name',{value:filename_1});
+        alert(localStorage.getItem("fileresult_1"));
+        
+    }
+
+    function loadFile(file){
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+            var result = this.result;//文件内容
+            //确定，将文件保存到本地存储中，替换现有的
+            try {
+                localStorage.setItem("filename_1", file.name);
+                localStorage.setItem("fileresult_1", result);
+            }
+            catch (e) {
+                console.log("Storage failed: " + e);
+            }
+            alert(result);
+        };
+        fileReader.readAsText(file);
+    }
+
+
+</script>
