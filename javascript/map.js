@@ -441,57 +441,61 @@ function initMap() {
 	        //alert(localStorage.getItem("fileresult"));
 	        var tableString = localStorage.fileresult;
 	        var numDay = 1; //start from Monday
-	        for(var j = numDay; j < 6; j++){
-	        	//number to day 1 -> Mon
-	        	num2day(j);
-	        	//strDay is "Mon", [1] means string after the first appearing of "Mon"
-	        	var strAftrDay = tableString.split(strDay)[1];
-	        	//Get the string (after "Mon") before "Tue"
-				num2day(j+1);
-	        	var strBtw12 = strAftrDay.split(strDay)[0];
-	        	//String of first row (timetable) on that day
-	        	var allDayLect = strBtw12.split("&nbsp;</td>\n</tr>")[0];
-	        	
-	        	var timeSlot = 0
-		          , colspan = 0
-		          , lectSplit = "";
+		    try{//in case of error type of timetable
+		        for(var j = numDay; j < 6; j++){
+		        	//number to day 1 -> Mon
+		        	num2day(j);
+		        	//strDay is "Mon", [1] means string after the first appearing of "Mon"
+		        	var strAftrDay = tableString.split(strDay)[1];
+		        	//Get the string (after "Mon") before "Tue"
+					num2day(j+1);
+		        	var strBtw12 = strAftrDay.split(strDay)[0];
+		        	//String of first row (timetable) on that day
+		        	var allDayLect = strBtw12.split("&nbsp;</td>\n</tr>")[0];
+		        	
+		        	var timeSlot = 0
+			          , colspan = 0
+			          , lectSplit = "";
 
-	        	for(var i = 0; lectSplit!=undefined; i++){
-		        	//loop every lecture on Mon(get all contents before each <!-END->)
-			        lectSplit = allDayLect.split("<!-- END OBJECT-CELL -->")[i]; 
-			        try{
-			        	// find out how many timeslots between last and this lecture
-			        	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
-			        	// calculate howmany timeslots total before this lecture start
-			        	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
-			        	slotCount = timeSlot + 1; // eg. 4 empty slots are 1100 actually
-				        // get time of that lecture
-				        var lectTime = slot2time(slotCount);
-				        // get name of that lecture
-				        var lectName = (lectSplit.split("<td align=\"left\">")[1]).split("</td>")[0];
-			        	// get building of that lecture
-			        	var lectBuildInLoop = (lectSplit.split("<td align=\"right\">")[2]).split("</td>")[0];
-			        	// short form of building name
-			        	var buildShort = ((lectBuildInLoop.split(/\s+/)).join("")).substr(0,6);
-			        	// get colspan number of that lecture (use to calc next lect's time)
-			        	colspan = (lectSplit.split("colspan=\"")[1]).substr(0,1);
-			        	// change the timetable array
-			        	timeTable[j-1].lectures[i].lect = lectName;
-			        	timeTable[j-1].lectures[i].time = lectTime;
-			        	timeTable[j-1].lectures[i].location = buildShort;
+		        	for(var i = 0; lectSplit!=undefined; i++){
+			        	//loop every lecture on Mon(get all contents before each <!-END->)
+				        lectSplit = allDayLect.split("<!-- END OBJECT-CELL -->")[i]; 
+				        try{
+				        	// find out how many timeslots between last and this lecture
+				        	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
+				        	// calculate howmany timeslots total before this lecture start
+				        	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
+				        	slotCount = timeSlot + 1; // eg. 4 empty slots are 1100 actually
+					        // get time of that lecture
+					        var lectTime = slot2time(slotCount);
+					        // get name of that lecture
+					        var lectName = (lectSplit.split("<td align=\"left\">")[1]).split("</td>")[0];
+				        	// get building of that lecture
+				        	var lectBuildInLoop = (lectSplit.split("<td align=\"right\">")[2]).split("</td>")[0];
+				        	// short form of building name
+				        	var buildShort = ((lectBuildInLoop.split(/\s+/)).join("")).substr(0,6);
+				        	// get colspan number of that lecture (use to calc next lect's time)
+				        	colspan = (lectSplit.split("colspan=\"")[1]).substr(0,1);
+				        	// change the timetable array
+				        	timeTable[j-1].lectures[i].lect = lectName;
+				        	timeTable[j-1].lectures[i].time = lectTime;
+				        	timeTable[j-1].lectures[i].location = buildShort;
 
-			        	//console.log("colspan: " + colspan);
-			        	//console.log("time before the lecture: " + timeBefoLect);
-			        	console.log(lectTime);
-			        	console.log(lectName);
-			        	console.log(lectBuildInLoop);
-			        	//console.log(buildShort);
-			        }catch(e){
-			        	console.log("All today's lectures captured");
-			        	break;
-			        }
-		    	}
-	        }
+				        	//console.log("colspan: " + colspan);
+				        	//console.log("time before the lecture: " + timeBefoLect);
+				        	console.log(lectTime);
+				        	console.log(lectName);
+				        	console.log(lectBuildInLoop);
+				        	//console.log(buildShort);
+				        }catch(e){
+				        	console.log("All today's lectures captured");
+				        	break;
+				        }
+			    	}
+		        }
+		    }catch{
+		    	alert('Timetable is not valid, try another one')
+		    }
 	        //LECTURE REMINDER
     		refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
 			lecture(dateTrans(),timeTrans());//dateTrans() timeTrans()
