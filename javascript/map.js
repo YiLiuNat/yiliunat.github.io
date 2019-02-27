@@ -73,6 +73,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
         center: faisalabad,
+        gestureHandling: 'greedy',
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
@@ -201,15 +202,26 @@ function initMap() {
     });
 
     addYourLocationButton(map, myMarker);
-
-
-
+    var isViewChanged = false;
     //DIRECTION SERVICE
+    var lastCenter = map.getCenter();
 	var directionsService = new google.maps.DirectionsService;
-	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var directionsDisplay = new google.maps.DirectionsRenderer({
+			map: map,
+        	preserveViewport: false
+		});
 	directionsDisplay.setMap(map);
 	var onChangeHandler = function() {
-    calculateAndDisplayRoute(directionsService, directionsDisplay);
+		var mapCenter = map.getCenter();
+		
+		if (mapCenter != lastCenter){isViewChanged = true}
+		directionsDisplay.setOptions({
+			map: map,
+			preserveViewport: isViewChanged
+		});
+
+    	calculateAndDisplayRoute(directionsService, directionsDisplay);
+    	lastCenter = mapCenter;
     };
 
 
@@ -494,10 +506,15 @@ function initMap() {
 			    	}
 		        }
 		    }catch{
-		    	alert('Timetable is not valid, try another one')
+		    	alert('Timetable is not valid, try another one');
+		    	localStorage.removeItem("filename");
+	        	localStorage.removeItem("fileresult");
+	        	window.location.reload();
 		    }
 	        //LECTURE REMINDER
-    		refreshTimetable = setInterval(lecture, 15000);//Refresh Timetable every 15s
+    		refreshTimetable = setInterval(function(){
+    			lecture(dateTrans(),timeTrans());
+    		}, 15000);//Refresh Timetable every 15s, setinterval won't trigger at first time
 			lecture(dateTrans(),timeTrans());//dateTrans() timeTrans()
 	    }else{
 	    	//if no timetable loaded
@@ -765,7 +782,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 		//CREATE A VAR FOR CURRENT LOCATION
 		
 		var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		
+
+		//var centerLtLg = new google.maps.LatLng(mapCenter .lat(), mapCenter .lng());
         //DIRECTIONS SERVICE
         directionsService.route({
           origin: currentLocation,
@@ -774,6 +792,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
+    //             var mapCenter = map.getCenter();
+				// alert(mapCenter)
+				// map.setCenter({lat:52.449216, lng:-1.931401});
           } else {
             window.alert('Directions request failed due to ' + status);
           }
