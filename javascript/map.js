@@ -204,17 +204,19 @@ function initMap() {
     addYourLocationButton(map, myMarker);
     var isViewChanged = false;
     //DIRECTION SERVICE
-    var lastCenter = map.getCenter();
+    var originalCenter = map.getCenter();
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer({
 			map: map,
         	preserveViewport: false
 		});
+	//MAPS RENDERING
 	directionsDisplay.setMap(map);
-	var onChangeHandler = function() {
+	function onChangeHandler(){
+	//var onChangeHandler = function() {
 		var mapCenter = map.getCenter();
-		
-		if (mapCenter != lastCenter){isViewChanged = true}
+		//if map center was changed, then preserve viewport.
+		if (mapCenter != originalCenter){isViewChanged = true}
 		directionsDisplay.setOptions({
 			map: map,
 			preserveViewport: isViewChanged
@@ -241,12 +243,14 @@ function initMap() {
 		//  	$("#gatePop").animate({bottom:'0'});
 		//  	break;
 		// }
-
+		$("#gatePop").unbind();
 		switch ($("#building").val()){
 			case ("AstonW"):
 				mulGate = false;				
 				navDest = "52.449216, -1.931401";
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#building").one("")
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 
 				// if($("#gateA").click()){
@@ -263,94 +267,149 @@ function initMap() {
 				mulGate = true;
 				//navDest = "52.449093, -1.930821"
 				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
-				//$("#gatePop").animate({bottom:'-3rem'});
-				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/greathall1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/greathall2.png'/>");
-				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
-				//$("#gatePop").animate({bottom:'0'});
+				//if(isRefresh == false){$("#gatePop").animate({bottom:'0rem'});}
 				if(navDest == latlngData.AstonWebbGreatHallG1 | navDest == latlngData.AstonWebbGreatHallG2){
-					$("#gatePop").animate({bottom:'0'},onChangeHandler);;
-				}//if you keep the selection, then refresh directly
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
+				}else{//if you keep the selection, then refresh directly
+					$("#gatePop").animate({bottom:'0'});
+				}
 				$("#gateA").click(function(){
 					navDest = latlngData.AstonWebbGreatHallG1;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				//$('#gateA').one("click",onChangeHandler); //event binding triggered only once
+				//document.getElementById('gateA').addEventListener('click',onChangeHandler);
 				$("#gateB").click(function(){
 					navDest = latlngData.AstonWebbGreatHallG2;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				//$('#gateB').one("click",onChangeHandler);
+				//document.getElementById('gateB').addEventListener('click',onChangeHandler);
 				break;
 			case ("Comput"):
 				mulGate = false;
 				navDest = latlngData.Comput;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Watson"):
 				mulGate = false;
 				navDest = latlngData.Watson;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("StaffHouse"):
 				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/staffhouse1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/staffhouse2.png'/>");
-				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				//if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				$("#gatePop").unbind();
 				if(navDest == latlngData.StaffHouseG1 | navDest == latlngData.StaffHouseG2){
-					$("#gatePop").animate({bottom:'0'},onChangeHandler);
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
+				}else{
+					$("#gatePop").animate({bottom:'0'});
 				}
 				$("#gateA").click(function(){
 					navDest = latlngData.StaffHouseG1;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				//$('#gateA').one("click",onChangeHandler);
 				$("#gateB").click(function(){
 					navDest = latlngData.StaffHouseG2;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				//$('#gateB').one("click",onChangeHandler);
 				break;
 			case ("Library"):
 				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/library1.png'/>");
 				$("#gateB").append("<img id='pic' src='../img/library2.jpg'/>");
-				if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				//if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
+				//$("#gatePop").unbind();
 				if(navDest == latlngData.LibraryG1 | navDest == latlngData.LibraryG2){
-					$("#gatePop").animate({bottom:'0'},onChangeHandler);
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
+				}else{
+					$("#gatePop").animate({bottom:'0'});
 				}
 				$("#gateA").click(function(){
 					navDest = latlngData.LibraryG1;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateA').addEventListener('click',onChangeHandler);
+				//$('#gateA').one("click",onChangeHandler);
 				$("#gateB").click(function(){
 					navDest = latlngData.LibraryG2;
+					$("#gatePop").animate({bottom:'-3rem'});
+					onChangeHandler();
 				});
-				document.getElementById('gateB').addEventListener('click',onChangeHandler);
+				//$('#gateB').one("click",onChangeHandler);
 				break;
 			case ("Sports"):
 				mulGate = false;
 				navDest = latlngData.Sports;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Gisber"):
 				mulGate = false;
 				navDest = latlngData.Gisber;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Muirhe"):
 				mulGate = false;
 				navDest = latlngData.Muirhe;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Metall"):
 				mulGate = false;
 				navDest = latlngData.Metall;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Univer"):
 				mulGate = false;
 				navDest = latlngData.Univer;
-				$("#gatePop").animate({bottom:'-3rem'},onChangeHandler);
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
+				break;
+			case ("Educat"):
+				mulGate = false;
+				navDest = latlngData.Educat;
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
+				break;
+			case ("Nuffie"):
+				mulGate = false;
+				navDest = latlngData.Nuffie;
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
+				break;
+			case ("Murray"):
+				mulGate = false;
+				navDest = latlngData.Murray;
+				//$("#gatePop").unbind();
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 		}
 
@@ -388,6 +447,7 @@ function initMap() {
 
 	var strDay = "";
 	function num2day(num){
+	//var strDay = "";
 		switch(num){
         	case (1): strDay = "Mon"; break;
         	case (2): strDay = "Tue"; break;
@@ -399,8 +459,8 @@ function initMap() {
 	}
 	//console.log(num2day(1));
 
-	var curTime = 0000;
 	function slot2time(slot){
+		var curTime = 0000;
 		switch(slot){
         	case (1): curTime = 900; break;
         	case (2): curTime = 930; break;
@@ -456,12 +516,12 @@ function initMap() {
 		    try{//in case of error type of timetable
 		        for(var j = numDay; j < 6; j++){
 		        	//number to day 1 -> Mon
-		        	num2day(j);
+		        	//;
 		        	//strDay is "Mon", [1] means string after the first appearing of "Mon"
-		        	var strAftrDay = tableString.split(strDay)[1];
+		        	var strAftrDay = tableString.split(num2day(j))[1];
 		        	//Get the string (after "Mon") before "Tue"
-					num2day(j+1);
-		        	var strBtw12 = strAftrDay.split(strDay)[0];
+					//num2day(j+1);
+		        	var strBtw12 = strAftrDay.split(num2day(j+1))[0];
 		        	//String of first row (timetable) on that day
 		        	var allDayLect = strBtw12.split("&nbsp;</td>\n</tr>")[0];
 		        	
@@ -681,15 +741,20 @@ function initMap() {
 	    	if(forcebreak == 14){forcebreak = 0; alert("Timetable Error"); break;}//break the loop in case of infinity
 	    }
 	};
+
+	var intervalSet = false;
 	$("#building").click(function(){//if user changed the selection,
 		try{
 			clearInterval(refreshTimetable);//then clear the timetable refresh interval
 		}catch{
 		}
-		var refreshCustomLoca = setInterval(function(){
-			isRefresh = true;//State this is a auto refresh(cancel the animation)
-			$("#building").change();//set a new interval that triggers location refresh
-		}, 15000);
+		if(intervalSet == false){
+			var refreshCustomLoca = setInterval(function(){
+				isRefresh = true;//State this is a auto refresh(cancel the animation)
+				$("#building").change();//set a new interval that triggers location refresh
+			}, 15000);
+			intervalSet = true; //In case you every time click #building add an interval
+		}else{}
 	});
 
 	//Calendar ----------------------------------------
@@ -780,7 +845,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 	//GET CURRENT LOCATION
 	navigator.geolocation.getCurrentPosition(function(position) {
 		//CREATE A VAR FOR CURRENT LOCATION
-		
 		var currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
 		//var centerLtLg = new google.maps.LatLng(mapCenter .lat(), mapCenter .lng());
@@ -792,9 +856,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
-    //             var mapCenter = map.getCenter();
-				// alert(mapCenter)
-				// map.setCenter({lat:52.449216, lng:-1.931401});
           } else {
             window.alert('Directions request failed due to ' + status);
           }
