@@ -6,64 +6,64 @@ var navDest = "1.01, 1.01";
 var mulGate = true;
 
 
-function addYourLocationButton(map, marker) 
-{
-    var controlDiv = document.createElement('div');
+// function addYourLocationButton(map, marker) 
+// {
+//     var controlDiv = document.createElement('div');
 
-    var firstChild = document.createElement('button');
-    firstChild.style.backgroundColor = '#fff';
-    firstChild.style.border = 'none';
-    firstChild.style.outline = 'none';
-    firstChild.style.width = '0.6rem';
-    firstChild.style.height = '0.6rem';
-    firstChild.style.borderRadius = '0.04rem';
-    firstChild.style.boxShadow = '0 0 0.01rem rgba(0,0,0,0.3)';
-    firstChild.style.cursor = 'pointer';
-    firstChild.style.marginRight = '0.17rem'; //button's margin
-    firstChild.style.padding = '0rem';
-    firstChild.title = 'Your Location';
-    controlDiv.appendChild(firstChild);
+//     var firstChild = document.createElement('button');
+//     firstChild.style.backgroundColor = '#fff';
+//     firstChild.style.border = 'none';
+//     firstChild.style.outline = 'none';
+//     firstChild.style.width = '0.6rem';
+//     firstChild.style.height = '0.6rem';
+//     firstChild.style.borderRadius = '0.04rem';
+//     firstChild.style.boxShadow = '0 0 0.01rem rgba(0,0,0,0.3)';
+//     firstChild.style.cursor = 'pointer';
+//     firstChild.style.marginRight = '0.17rem'; //button's margin
+//     firstChild.style.padding = '0rem';
+//     firstChild.title = 'Your Location';
+//     controlDiv.appendChild(firstChild);
 
-    var secondChild = document.createElement('div');
-    secondChild.style.margin = '0.1rem';
-    secondChild.style.width = '0.36rem';
-    secondChild.style.height = '0.36rem';
-    secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
-    secondChild.style.backgroundSize = '3.6rem 0.36rem';
-    secondChild.style.backgroundPosition = '0px 0px';
-    secondChild.style.backgroundRepeat = 'no-repeat';
-    secondChild.id = 'you_location_img';
-    firstChild.appendChild(secondChild);
+//     var secondChild = document.createElement('div');
+//     secondChild.style.margin = '0.1rem';
+//     secondChild.style.width = '0.36rem';
+//     secondChild.style.height = '0.36rem';
+//     secondChild.style.backgroundImage = 'url(https://maps.gstatic.com/tactile/mylocation/mylocation-sprite-1x.png)';
+//     secondChild.style.backgroundSize = '3.6rem 0.36rem';
+//     secondChild.style.backgroundPosition = '0px 0px';
+//     secondChild.style.backgroundRepeat = 'no-repeat';
+//     secondChild.id = 'you_location_img';
+//     firstChild.appendChild(secondChild);
 
-    google.maps.event.addListener(map, 'dragend', function() {
-        $('#you_location_img').css('background-position', '0px 0px');
-    });
+//     google.maps.event.addListener(map, 'dragend', function() {
+//         $('#you_location_img').css('background-position', '0px 0px');
+//     });
 
-    firstChild.addEventListener('click', function() {
-        var imgX = '0';
-        var animationInterval = setInterval(function(){
-            if(imgX == '-18') imgX = '0';
-            else imgX = '-18';
-            $('#you_location_img').css('background-position', imgX+'px 0px');
-        }, 500);
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //定位之后的坐标
-                marker.setPosition(latlng);
-                map.setCenter(latlng);
-                clearInterval(animationInterval);
-                $('#you_location_img').css('background-position', '-144px 0px');
-            });
-        }
-        else{
-            clearInterval(animationInterval);
-            $('#you_location_img').css('background-position', '0px 0px');
-        }
-    });
+//     firstChild.addEventListener('click', function() {
+//         var imgX = '0';
+//         var animationInterval = setInterval(function(){
+//             if(imgX == '-18') imgX = '0';
+//             else imgX = '-18';
+//             $('#you_location_img').css('background-position', imgX+'px 0px');
+//         }, 500);
+//         if(navigator.geolocation) {
+//             navigator.geolocation.getCurrentPosition(function(position) {
+//                 var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //定位之后的坐标
+//                 marker.setPosition(latlng);
+//                 map.setCenter(latlng);
+//                 clearInterval(animationInterval);
+//                 $('#you_location_img').css('background-position', '-144px 0px');
+//             });
+//         }
+//         else{
+//             clearInterval(animationInterval);
+//             $('#you_location_img').css('background-position', '0px 0px');
+//         }
+//     });
 
-    controlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
-}
+//     controlDiv.index = 1;
+//     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
+// }
 
 
 
@@ -195,14 +195,16 @@ function initMap() {
     });
 
     //MY LOCATION
-    var myMarker = new google.maps.Marker({
-        map: map,
-        animation: google.maps.Animation.DROP,
-        //position: faisalabad
-    });
+    // var myMarker = new google.maps.Marker({
+    //     map: map,
+    //     animation: google.maps.Animation.DROP,
+    //     //position: faisalabad
+    // });
 
-    addYourLocationButton(map, myMarker);
-    var isViewChanged = false;
+    // addYourLocationButton(map, myMarker);
+
+    var userDragged = false;
+    var mapCenter = map.getCenter();
     //DIRECTION SERVICE
     var originalCenter = map.getCenter();
 	var directionsService = new google.maps.DirectionsService;
@@ -214,12 +216,13 @@ function initMap() {
 	directionsDisplay.setMap(map);
 	function onChangeHandler(){
 	//var onChangeHandler = function() {
-		var mapCenter = map.getCenter();
+		userDragged = false;
+		mapCenter = map.getCenter();
 		//if map center was changed, then preserve viewport.
-		if (mapCenter != originalCenter){isViewChanged = true}
+		if (mapCenter != originalCenter){userDragged = true}
 		directionsDisplay.setOptions({
 			map: map,
-			preserveViewport: isViewChanged
+			preserveViewport: userDragged
 		});
 
     	calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -227,7 +230,7 @@ function initMap() {
     };
 
 
-
+    var lastSelection = undefined;
 
     //GATE POP-UP START
     //document.getElementById('building').addEventListener('change',function(){
@@ -248,7 +251,11 @@ function initMap() {
 			case ("AstonW"):
 				mulGate = false;				
 				navDest = "52.449216, -1.931401";
-				//$("#building").one("")
+				//Selection changed?
+				if(lastSelection != "AstonW"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "AstonW";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -272,6 +279,11 @@ function initMap() {
 				//if(isRefresh == false){$("#gatePop").animate({bottom:'0rem'});}
 				if(navDest == latlngData.AstonWebbGreatHallG1 | navDest == latlngData.AstonWebbGreatHallG2){
 					$("#gatePop").animate({bottom:'-3rem'});
+					//Selection changed?
+					if(lastSelection != "AstonWebbGreatHall"){
+						originalCenter = map.getCenter();
+					}
+					lastSelection = "AstonWebbGreatHall";
 					onChangeHandler();
 				}else{//if you keep the selection, then refresh directly
 					$("#gatePop").animate({bottom:'0'});
@@ -279,6 +291,8 @@ function initMap() {
 				$("#gateA").click(function(){
 					navDest = latlngData.AstonWebbGreatHallG1;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "AstonWebbGreatHall";
 					onChangeHandler();
 				});
 				//$('#gateA').one("click",onChangeHandler); //event binding triggered only once
@@ -286,6 +300,8 @@ function initMap() {
 				$("#gateB").click(function(){
 					navDest = latlngData.AstonWebbGreatHallG2;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "AstonWebbGreatHall";
 					onChangeHandler();
 				});
 				//$('#gateB').one("click",onChangeHandler);
@@ -295,12 +311,20 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Comput;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Comput"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Comput";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Watson"):
 				mulGate = false;
 				navDest = latlngData.Watson;
+				if(lastSelection != "Watson"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Watson";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -313,6 +337,10 @@ function initMap() {
 				$("#gatePop").unbind();
 				if(navDest == latlngData.StaffHouseG1 | navDest == latlngData.StaffHouseG2){
 					$("#gatePop").animate({bottom:'-3rem'});
+					if(lastSelection != "StaffHouse"){
+						originalCenter = map.getCenter();
+					}
+					lastSelection = "StaffHouse";
 					onChangeHandler();
 				}else{
 					$("#gatePop").animate({bottom:'0'});
@@ -320,12 +348,16 @@ function initMap() {
 				$("#gateA").click(function(){
 					navDest = latlngData.StaffHouseG1;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "StaffHouse";
 					onChangeHandler();
 				});
 				//$('#gateA').one("click",onChangeHandler);
 				$("#gateB").click(function(){
 					navDest = latlngData.StaffHouseG2;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "StaffHouse";
 					onChangeHandler();
 				});
 				//$('#gateB').one("click",onChangeHandler);
@@ -339,6 +371,10 @@ function initMap() {
 				//$("#gatePop").unbind();
 				if(navDest == latlngData.LibraryG1 | navDest == latlngData.LibraryG2){
 					$("#gatePop").animate({bottom:'-3rem'});
+					if(lastSelection != "Library"){
+						originalCenter = map.getCenter();
+					}
+					lastSelection = "Library";
 					onChangeHandler();
 				}else{
 					$("#gatePop").animate({bottom:'0'});
@@ -346,12 +382,16 @@ function initMap() {
 				$("#gateA").click(function(){
 					navDest = latlngData.LibraryG1;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "Library";
 					onChangeHandler();
 				});
 				//$('#gateA').one("click",onChangeHandler);
 				$("#gateB").click(function(){
 					navDest = latlngData.LibraryG2;
 					$("#gatePop").animate({bottom:'-3rem'});
+					originalCenter = map.getCenter();
+					lastSelection = "Library";
 					onChangeHandler();
 				});
 				//$('#gateB').one("click",onChangeHandler);
@@ -359,6 +399,10 @@ function initMap() {
 			case ("Sports"):
 				mulGate = false;
 				navDest = latlngData.Sports;
+				if(lastSelection != "Sports"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Sports";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -366,6 +410,10 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Gisber;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Gisber"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Gisber";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -373,6 +421,10 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Muirhe;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Muirhe"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Muirhe";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -380,6 +432,10 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Metall;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Metall"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Metall";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -387,6 +443,10 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Univer;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Univer"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Univer";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -394,6 +454,10 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Educat;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Educat"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Educat";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
@@ -401,13 +465,20 @@ function initMap() {
 				mulGate = false;
 				navDest = latlngData.Nuffie;
 				//$("#gatePop").unbind();
+				if(lastSelection != "Nuffie"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Nuffie";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
 			case ("Murray"):
 				mulGate = false;
 				navDest = latlngData.Murray;
-				//$("#gatePop").unbind();
+				if(lastSelection != "Murray"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Murray";
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
