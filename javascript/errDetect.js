@@ -1,4 +1,5 @@
 function errDetect(){
+    alert("有没有弹窗弹出来")
     try{
     	setTimeout(function(){
     		if(window.google){
