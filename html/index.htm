@@ -19,9 +19,63 @@
   <body>
     <div id="map"></div>
     <div id="reactFrame"></div>
+    <div>
+      <div id="panel">
+        <div id="btnsFrame">
+          <div id = "sideBarBtn"></div>
+          <div id = "calBtn"></div>
+          <div id = "cal">
+            <input id="setTime" type="text" placeholder="Enter a time"></input>
+            <div id="mondiv">
+              <span id="monspan">Mon</span><div id="monline"></div>
+            </div>
+            <div id="tuediv"><span id ="tuespan">Tue</span><div id ="tueline"></div></div>
+            <div id="weddiv"><span id ="wedspan">Wed</span><div id ="wedline"></div></div>
+            <div id="thudiv"><span id ="thuspan">Thur</span><div id ="thuline"></div></div>
+            <div id="fridiv"><span id ="frispan">Fri</span></div>
+          </div>
+          <input type="text" id="search" onKeyUp="myFunction()" placeholder="Search a Campus Building"/>
+          <select id="building">
+            <option value="" selected="selected"></option>
+            <option value="AstonW">Aston Webb B Block</option>
+            <option value="AstonWebbGreatHall">Aston Webb Great Hall</option>
+            <option value="Comput">Computer Science Building</option>
+            <option value="Educat">Education Vaughan Jeffreys</option>
+            <option value="Gisber">Gisbert Kapp Building</option>
+            <option value="Metall">Metallurgy and Materials</option>
+            <option value="Muirhe">Muirhead Tower</option>
+            <option value="Murray">Murray Learning Centre</option>
+            <option value="Nuffie">Nuffield (G18)</option>
+            <option value="Univer">University House</option>
+            <option value="Watson">Watson Building (R15)</option>
+            <option value="StaffHouse">Staff House (R24)</option>
+            <option value="Library">Library</option>
+            <option value="Sports">Sports and Exercise</option>
+          </select>
+        </div>
+        <div id="reminder">
+          <span id="yourNextText">Your Next Lecture</span>
+          <div id="lecture"><span>You Don't Have Any Lectures</span></div>
+          <div id="time"></div>
+      </div>
+      </div>
+      <div id="gatePop">
+        <div id="whichGate">Please Select the Entrance</div>
+        <button id="gateA"></button>
+        <button id="gateB"></button>
+      </div>
+      <div id="sideBar">
+        <button id="sideBarClose">&#10005;</button>
+        <div id="sideBarContent">
+          <span id="settings">Settings</span>
+          <div id="sideBarLine"></div>
+          <button id="uploadBtn" type="button">Upload Your Timetable</button>
+          <input type="file" id="tableUpload"/>
+        </div>
+      </div>
+    </div>
 
-
-    <script type="text/babel">
+<!--     <script type="text/babel">
       function Panel(props) {
         return  <div>
                   <div id="panel">
@@ -88,7 +142,7 @@
         element,
         document.getElementById('reactFrame')
       );
-    </script>
+    </script> -->
     <script type="text/javascript" src="../javascript/json3.min.js"></script>
     <script type="text/javascript" src="../javascript/timetable.js"></script>
     <script type="text/javascript" src="../javascript/latlngData.js"></script>
