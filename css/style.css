@@ -27,8 +27,9 @@ html {
 #map {
   position: absolute;
   left: 0px;
+  top:3.6rem;
   bottom: 0rem;
-  height: 9rem;  
+  /*height: 9rem;  */
   width: 100%;  
  }
 
@@ -36,7 +37,7 @@ html {
   position: absolute;
   left: 0px;
   top: 0rem;
-  height: 3.5rem;  
+  height: 3.6rem;  
   width: 100%;
   background-color: white;
   /*background-color: grey;*/
@@ -500,9 +501,18 @@ html {
 #time {
   font-family: 'Mukta', sans-serif;
   position: relative;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
   top: 1.2rem;
+}
+
+#tinyBtnsFrame {
+  position: absolute;
+  bottom: 0.1rem;
+  height: 0.6rem;
+  width: 5.6rem;
+  left: 50%;
+  margin-left: -2.8rem;
 }
 
  #gatePop {
