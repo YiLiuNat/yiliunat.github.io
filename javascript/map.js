@@ -66,10 +66,30 @@ var mulGate = true;
 // }
 
 
+function sidebar(){
+	//SIDE BAR ----------------------------------------
+    $('#sideBarBtn').click(function(){
+    	$('#sideBar').animate({left:'0'});
+    });
+    $('#sideBarClose').click(function(){
+    	$('#sideBar').animate({left:'-100%'});
+    });
+    try{
+    	setTimeout(function(){
+    		if(window.google){
+    			console.log("Google Maps Loaded");
+    		}else{
+    			alert("Your browser does not support Google Maps API, please try other browsers!")
+    		}
+    	},2000)
+    }catch(e){
+    	alert(e);
+    }
+}
+sidebar();
+
 
 var myScroll;
-
-
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
@@ -663,6 +683,7 @@ function initMap() {
 		        setTimeout(function() {
 	                myScroll.refresh();
 	            }, 100);
+
 		    }catch{
 		    	alert('Timetable is not valid, try another one');
 		    	localStorage.removeItem("filename");
@@ -927,30 +948,15 @@ function initMap() {
     	defaultDay = 4;
     	lecture(defaultDay,800);
     })
+
+
+    //Mouse Wheel Detection
+    $("#tableLog").mousewheel(function(){
+    	alert("Please drag this area. Do not use mouse wheel.");
+    })
 }
 
-function sidebar(){
-	//SIDE BAR ----------------------------------------
-    $('#sideBarBtn').click(function(){
-    	$('#sideBar').animate({left:'0'});
-    });
-    $('#sideBarClose').click(function(){
-    	$('#sideBar').animate({left:'-100%'});
-    });
-    try{
-    	setTimeout(function(){
-    		if(window.google){
-    			console.log("Google Maps Loaded");
-    		}else{
-    			alert("Your browser does not support Google Maps API, please try other browsers!")
-    		}
-    	},2000)
-    }catch(e){
-    	alert(e);
-    }
-}
 
-sidebar();
 
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
