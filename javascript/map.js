@@ -67,6 +67,7 @@ var mulGate = true;
 
 
 
+var myScroll;
 
 
 function initMap() {
@@ -499,7 +500,17 @@ function initMap() {
 	 //        }
 
 
-	 	//Get Date
+	lectureBlocksArea();
+	function lectureBlocksArea(){
+	    myScroll = new IScroll("#tableLog",{
+			bounce: true,
+			scrollY: true,
+	    	tap:true,
+	    	scrollbars:true
+	    });
+	}
+
+	//Get Date
 	function dateTrans(){
 		var date = new Date()
 		  , week = date.getDay()//Get the day of week (returns num eg1,2,3)
@@ -567,6 +578,7 @@ function initMap() {
     var filename = localStorage.getItem("filename");//filename in localstorage
     var fileresult = localStorage.getItem("fileresult");//file content in storage(string）
     function isLoad(){
+
 	    if(filename && fileresult){//if already have this file in localstorage
 	        //storageFile：use localStorage to create File object
 	        var storageFile = new File([fileresult], {"type":"text/plain"});
@@ -580,12 +592,16 @@ function initMap() {
 	        	localStorage.removeItem("fileresult");
 	        	window.location.reload();
 	        });
-
+	        $("#tableLog").css("visibility","visible");
+	        var totalLecturesHeight = 0;
+	        var numBlocks = 0;
 	        //alert(localStorage.getItem("fileresult"));
 	        var tableString = localStorage.fileresult;
 	        var numDay = 1; //start from Monday
 		    try{//in case of error type of timetable
 		        for(var j = numDay; j < 6; j++){
+
+		        	$("#scroller").append("<div id=\"capturedBlock\">"+num2day(j)+" Lectures</div>");
 		        	//number to day 1 -> Mon
 		        	//;
 		        	//strDay is "Mon", [1] means string after the first appearing of "Mon"
@@ -629,13 +645,24 @@ function initMap() {
 				        	console.log(lectTime);
 				        	console.log(lectName);
 				        	console.log(lectBuildInLoop);
+				        	$("#scroller").append("<div id=\"lectureBlock\">"+lectTime+"<br>"+lectBuildInLoop+"<br><br>"+lectName+"</div>");
+				        	//totalLecturesHeight += $('#lectureBlock').outerHeight();
+				        	//numBlocks += 1;
 				        	//console.log(buildShort);
 				        }catch(e){
-				        	console.log("All today's lectures captured");
+				        	console.log("All " + num2day(j) + "\'s lectures captured");
+				        	console.log("-------------------------------------");
+				        	//totalLecturesHeight += $('#capturedBlock').outerHeight();
+				        	//numBlocks += 1;
 				        	break;
 				        }
+
 			    	}
 		        }
+		        //$("#scroller").css("height",totalLecturesHeight/100+numBlocks*0.05+"rem");
+		        setTimeout(function() {
+	                myScroll.refresh();
+	            }, 100);
 		    }catch{
 		    	alert('Timetable is not valid, try another one');
 		    	localStorage.removeItem("filename");
@@ -677,13 +704,7 @@ function initMap() {
     	loadFile(this.files[0]);
     });
 
-    //SIDE BAR ----------------------------------------
-    $('#sideBarBtn').click(function(){
-    	$('#sideBar').animate({left:'0'});
-    });
-    $('#sideBarClose').click(function(){
-    	$('#sideBar').animate({left:'-100%'});
-    });
+
 
 	//-----------------------------------	
     // $('#uploadBtn').click(function(){
@@ -771,12 +792,12 @@ function initMap() {
 	    	if (j > 4 || j == -1){//if today is Sat/Sun, set it as Mon 8 AM
 	    		j = 0; 
 	    		time = 800;
-	    		$("#yourNextText").html('Your Monday\'s Lecture');
+	    		//$("#yourNextText").html('Your Monday\'s Lecture');
 	    	}
 	    	if (j == 4 & timeTable[4].lectures[0] == undefined){//if Today is Friday, and no lecture today
 	    		j = 0;//set j as Monday.
 	    		time = 800;
-	    		$("#yourNextText").html('Your Monday\'s Lecture');
+	    		//$("#yourNextText").html('Your Monday\'s Lecture');
 	    	}
 	    	if (timeTable[j].lectures[0] !== undefined){ //if there's lecture on jst day 
 	    		var i = 0;
@@ -801,10 +822,10 @@ function initMap() {
 		    		break;
 		    	}catch(err){//if all today's lecture past, continue the loop.
 		    		time = 800; // reset time as 0, make sure the time always doesn't past the next lecture's.
-		    		$("#yourNextText").html('Your Tomorrow\'s Lecture');
+		    		//$("#yourNextText").html('Your Tomorrow\'s Lecture');
 		    		if (j == 4){// If today is Friday, set j as Monday (-1, loop will make j+1 = 0).
 		    			j = -1;
-		    			$("#yourNextText").html('Your Monday\'s Lecture');
+		    			//$("#yourNextText").html('Your Monday\'s Lecture');
 		    		}
 		    	}
 	    	}
@@ -908,7 +929,28 @@ function initMap() {
     })
 }
 
+function sidebar(){
+	//SIDE BAR ----------------------------------------
+    $('#sideBarBtn').click(function(){
+    	$('#sideBar').animate({left:'0'});
+    });
+    $('#sideBarClose').click(function(){
+    	$('#sideBar').animate({left:'-100%'});
+    });
+    try{
+    	setTimeout(function(){
+    		if(window.google){
+    			console.log("Google Maps Loaded");
+    		}else{
+    			alert("Your browser does not support Google Maps API, please try other browsers!")
+    		}
+    	},2000)
+    }catch(e){
+    	alert(e);
+    }
+}
 
+sidebar();
 
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
