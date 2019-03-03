@@ -1,5 +1,5 @@
 // $(document).ready(function() {
-	
+try{
 var map;
 var faisalabad = {lat:52.449970, lng:-1.930870};
 var navDest = "1.01, 1.01";
@@ -969,4 +969,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
           }
       });
   });
+}
+}catch(e){
+	alert(e);
 }
