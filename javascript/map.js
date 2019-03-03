@@ -686,7 +686,7 @@ function initMap() {
 			lecture(dateTrans(),timeTrans());//dateTrans() timeTrans()
 	    }else{
 	    	//if no timetable loaded
-	    	$("#panel").css("height","2.7rem");
+	    	$("#panel").css("height","3.6rem");
 	    	$("#yourNextText").html("<span id=\"helpText\">Try to upload your <p>timetable here</p></span><div id=\"arrow\"></div>");
 	    	$("#lecture").html("<span></span>");
 	    }
