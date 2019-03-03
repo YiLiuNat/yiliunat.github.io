@@ -74,17 +74,6 @@ function sidebar(){
     $('#sideBarClose').click(function(){
     	$('#sideBar').animate({left:'-100%'});
     });
-    try{
-    	setTimeout(function(){
-    		if(window.google){
-    			console.log("Google Maps Loaded");
-    		}else{
-    			alert("Your browser does not support Google Maps API, please try other browsers!")
-    		}
-    	},2000)
-    }catch(e){
-    	alert(e);
-    }
 }
 sidebar();
 
@@ -951,7 +940,7 @@ function initMap() {
 
 
     //Mouse Wheel Detection
-    $("#tableLog").mousewheel(function(){
+    $("#tableLog").on('mousewheel',function(){
     	alert("Please drag this area. Do not use mouse wheel.");
     })
 }
