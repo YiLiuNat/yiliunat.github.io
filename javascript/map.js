@@ -1,5 +1,5 @@
-// $(document).ready(function() {
-try{
+// $(document).ready(function() 
+alert("开始运行");
 var map;
 var faisalabad = {lat:52.449970, lng:-1.930870};
 var navDest = "1.01, 1.01";
@@ -65,8 +65,9 @@ var mulGate = true;
 //     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
 // }
 
-
+alert("sideBar加载前");
 function sidebar(){
+	alert("正在加载");
 	//SIDE BAR ----------------------------------------
     $('#sideBarBtn').click(function(){
     	$('#sideBar').animate({left:'0'});
@@ -969,7 +970,4 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
           }
       });
   });
-}
-}catch(e){
-	alert(e);
 }
