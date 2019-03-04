@@ -1,5 +1,6 @@
+alert("没function")
 function errDetect(){
-    alert("3");
+    alert("4");
     try{
     	setTimeout(function(){
     		if(window.google){
