@@ -1,7 +1,8 @@
 // $(document).ready(function() 
-function test(){
-alert("开始运行");}
-test();
+setTimeout(
+function (){
+alert("开始运行");},2000)
+
 var map;
 var faisalabad = {lat:52.449970, lng:-1.930870};
 var navDest = "1.01, 1.01";
