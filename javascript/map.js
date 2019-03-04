@@ -677,7 +677,7 @@ function initMap() {
 	                myScroll.refresh();
 	            }, 100);
 
-		    }catch{
+		    }catch(e){
 		    	alert('Timetable is not valid, try another one');
 		    	localStorage.removeItem("filename");
 	        	localStorage.removeItem("fileresult");
