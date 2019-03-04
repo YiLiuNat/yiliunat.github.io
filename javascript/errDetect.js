@@ -1,4 +1,4 @@
-alert("没function")
+alert("没function");
 function errDetect(){
     alert("4");
     try{
