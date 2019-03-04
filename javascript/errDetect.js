@@ -1,4 +1,5 @@
 function errDetect(){
+    alert();
     try{
     	setTimeout(function(){
     		if(window.google){
