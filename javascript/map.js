@@ -864,7 +864,7 @@ function initMap() {
 	$("#building").click(function(){//if user changed the selection,
 		try{
 			clearInterval(refreshTimetable);//then clear the timetable refresh interval
-		}catch{
+		}catch(e){
 		}
 		if(intervalSet == false){
 			var refreshCustomLoca = setInterval(function(){
@@ -887,7 +887,7 @@ function initMap() {
     	if(enter.keyCode == 13){//if user type enter in search bar
     		try{
     			clearInterval(refreshTimetable);
-    		}catch{}
+    		}catch(e){}
     		if(defaultDay == -1 || defaultDay == 5){
     			defaultDay == 0;
     		}
@@ -911,7 +911,7 @@ function initMap() {
     $('#mondiv').click(function(){
     	try{
     		clearInterval(refreshTimetable);
-    	}catch{}
+    	}catch(e){}
     	$('#setTime').val('0800');
 		$("#yourNextText").html('Your Next Lecture');
     	defaultDay = 0;
@@ -920,7 +920,7 @@ function initMap() {
     $('#tuediv').click(function(){
     	try{
     		clearInterval(refreshTimetable);
-    	}catch{}
+    	}catch(e){}
     	$('#setTime').val('0800');
     	$("#yourNextText").html('Your Next Lecture');
     	defaultDay = 1;
@@ -929,7 +929,7 @@ function initMap() {
     $('#weddiv').click(function(){
     	try{
     		clearInterval(refreshTimetable);
-    	}catch{}
+    	}catch(e){}
     	$('#setTime').val('0800');
     	$("#yourNextText").html('Your Next Lecture');
     	defaultDay = 2;
@@ -938,7 +938,7 @@ function initMap() {
     $('#thudiv').click(function(){
     	try{
     		clearInterval(refreshTimetable);
-    	}catch{}
+    	}catch(e){}
     	$('#setTime').val('0800');
     	$("#yourNextText").html('Your Next Lecture');
     	defaultDay = 3;
@@ -947,7 +947,7 @@ function initMap() {
     $('#fridiv').click(function(){
     	try{
     		clearInterval(refreshTimetable);
-    	}catch{}
+    	}catch(e){}
     	$('#setTime').val('0800');
     	$("#yourNextText").html('Your Next Lecture');
     	defaultDay = 4;
