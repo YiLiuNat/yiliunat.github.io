@@ -1,9 +1,9 @@
 // $(document).ready(function() 
 
-var map;
-var faisalabad = {lat:52.449970, lng:-1.930870};
-var navDest = "1.01, 1.01";
-var mulGate = true;
+var map
+  , faisalabad = {lat:52.449970, lng:-1.930870}
+  , navDest = "1.01, 1.01"
+  , mulGate = true;
 
 
 // function addYourLocationButton(map, marker) 
@@ -65,6 +65,185 @@ var mulGate = true;
 //     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
 // }
 
+function tinyBtns(){
+	var studyBtnState = "off"
+	  , coffeeBtnState = "off"
+	  , foodBtnState = "off"
+	  , parkingBtnState = "off"
+	  , studyMarkersList = []
+	  , coffeeMarkersList = []
+	  , foodMarkersList = []
+	  , parkingMarkersList = [];
+
+	function studySpaceMarkers(map){
+		for (var i = 0; i<studyMarkersList.length;i++){
+			studyMarkersList[i].setMap(map);
+		}
+	}
+
+	function coffeeMarkers(map){
+		for (var i = 0; i<coffeeMarkersList.length;i++){
+			coffeeMarkersList[i].setMap(map);
+		}
+	}
+
+	function foodMarkers(map){
+		for (var i = 0; i<foodMarkersList.length;i++){
+			foodMarkersList[i].setMap(map);
+		}
+	}
+
+	function parkingMarkers(map){
+		for (var i = 0; i<parkingMarkersList.length;i++){
+			parkingMarkersList[i].setMap(map);
+		}
+	}
+
+	$("#studySpace").click(function(){
+		if(studyBtnState == "off"){
+			$("#studySpace").css("background-color","#D9D9D9");
+			var marker1 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Murray.substr(0,10),latlngData.Murray.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker2 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.LibraryG1.substr(0,10),latlngData.LibraryG1.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker3 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Nuffie.substr(0,10),latlngData.Nuffie.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker4 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Sports.substr(0,10),latlngData.Sports.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker5 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Gisber.substr(0,10),latlngData.Gisber.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker6 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Muirhe.substr(0,10),latlngData.Muirhe.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+
+			studyMarkersList.push(marker1,marker2,marker3,marker4,marker5,marker6);
+			studyBtnState = "on";
+		}else{
+			$("#studySpace").css("background-color","white");
+			studySpaceMarkers(null);
+			studyMarkersList = [];
+			studyBtnState = "off";
+		}
+	});
+
+	$("#coffee").click(function(){
+		if(coffeeBtnState == "off"){
+			$("#coffee").css("background-color","#D9D9D9");
+			var marker1 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Costa.substr(0,10),latlngData.Costa.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker2 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Muirhe.substr(0,10),latlngData.Muirhe.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker3 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Bramal.substr(0,10),latlngData.Bramal.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+
+			coffeeMarkersList.push(marker1,marker2,marker3);
+			coffeeBtnState = "on";
+		}else{
+			$("#coffee").css("background-color","white");
+			coffeeMarkers(null);
+			coffeeBtnState = "off";
+		}
+	});
+
+	$("#food").click(function(){
+		if(foodBtnState == "off"){
+			$("#food").css("background-color","#D9D9D9");
+			var marker1 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.Costa.substr(0,10),latlngData.Costa.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker2 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.GoCent.substr(0,10),latlngData.GoCent.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker3 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.StaffH.substr(0,10),latlngData.StaffH.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+
+			foodMarkersList.push(marker1,marker2,marker3);
+			foodBtnState = "on";
+		}else{
+			$("#food").css("background-color","white");
+			foodMarkers(null);
+			foodBtnState = "off";
+		}
+	});
+
+	$("#parking").click(function(){
+		if(parkingBtnState == "off"){
+			$("#parking").css("background-color","#D9D9D9");
+			var marker1 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.ParkingLot1.substr(0,10),latlngData.ParkingLot1.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker2 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.ParkingLot2.substr(0,10),latlngData.ParkingLot2.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+			var marker3 = new google.maps.Marker({ 
+				position: new google.maps.LatLng(latlngData.ParkingLot3.substr(0,10),latlngData.ParkingLot3.substr(11,21)),
+				map: map,
+				animation: google.maps.Animation.DROP
+				//label: 'S'
+			});
+
+			parkingMarkersList.push(marker1,marker2,marker3);
+			parkingBtnState = "on";
+		}else{
+			$("#parking").css("background-color","white");
+			parkingMarkers(null);
+			parkingBtnState = "off";
+		}
+	});
+
+}
+
 function sidebar(){
 	//SIDE BAR ----------------------------------------
     $('#sideBarBtn').click(function(){
@@ -79,8 +258,9 @@ sidebar();
 
 var myScroll;
 function initMap() {
+	tinyBtns();
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
+        zoom: 15,
         center: faisalabad,
         gestureHandling: 'greedy',
         mapTypeControl: false,
@@ -697,8 +877,8 @@ function initMap() {
 			lecture(dateTrans(),timeTrans());//dateTrans() timeTrans()
 	    }else{
 	    	//if no timetable loaded
-	    	$("#panel").css("height","2.7rem");
-	    	$("#map").css("top","2.7rem");
+	    	$("#panel").css("height","3.2rem");
+	    	$("#map").css("top","3.2rem");
 	    	$("#yourNextText").html("<span id=\"helpText\">Try to upload your <p>timetable here</p></span><div id=\"arrow\"></div>");
 	    	$("#lecture").html("<span></span>");
 	    }
