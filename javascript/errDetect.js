@@ -1,6 +1,4 @@
-alert("没function");
 function errDetect(){
-    alert("4");
     try{
     	setTimeout(function(){
     		if(window.google){
@@ -11,7 +9,6 @@ function errDetect(){
     	},2000)
     }catch(e){
     	alert(e);
-        alert("errlog2")
     }
 }
 errDetect();
