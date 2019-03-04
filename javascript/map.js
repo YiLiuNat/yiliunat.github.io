@@ -588,10 +588,22 @@ function initMap() {
     $('#uploadBtn').click(function(){
     	$('#tableUpload').click();
     });
+
+    function isLocalStorageSupported(){
+    	var testKey = 'test'
+    	  , storage = window.sessionStorage;
+    	try{
+    		storage.setItem(testKey,'testValue');
+    		storage.removeItem(testKey);
+    	}catch(e){
+    		alert("Your browser doesn't support LocalStorage! Google Chrome is the recommended browser for this project.");
+    	}
+    }
+    isLocalStorageSupported();
+
     var filename = localStorage.getItem("filename");//filename in localstorage
     var fileresult = localStorage.getItem("fileresult");//file content in storage(string）
     function isLoad(){
-
 	    if(filename && fileresult){//if already have this file in localstorage
 	        //storageFile：use localStorage to create File object
 	        var storageFile = new File([fileresult], {"type":"text/plain"});
@@ -677,7 +689,7 @@ function initMap() {
 	                myScroll.refresh();
 	            }, 100);
 
-		    }catch(e){
+		    }catch (e) {
 		    	alert('Timetable is not valid, try another one');
 		    	localStorage.removeItem("filename");
 	        	localStorage.removeItem("fileresult");
