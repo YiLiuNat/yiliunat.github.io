@@ -267,6 +267,7 @@ function initMap() {
         streetViewControl: false,
         fullscreenControl: false,
         styles: [ //Map style descipt
+		    
 		    {
 		        "stylers": [
 		            {
@@ -821,7 +822,7 @@ function initMap() {
 				        lectSplit = allDayLect.split("<!-- END OBJECT-CELL -->")[i]; 
 				        try{
 				        	// find out how many timeslots between last and this lecture
-				        	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1;
+				        	var timeBefoLect = (lectSplit.split('&nbsp;')).length-1; 
 				        	// calculate howmany timeslots total before this lecture start
 				        	timeSlot = Number(timeSlot) + Number(timeBefoLect) + Number(colspan);
 				        	slotCount = timeSlot + 1; // eg. 4 empty slots are 1100 actually
