@@ -610,7 +610,7 @@ html {
   left: 0.5rem;
   top: 1rem;
   background-color: grey;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
  }
 
 #gateB {
@@ -620,7 +620,7 @@ html {
   right: 0.5rem;
   top: 1rem;
   background-color: grey;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
  }
 
  #pic {
