@@ -556,7 +556,7 @@ function initMap() {
 				if(isRefresh == false){$("#gatePop").animate({bottom:'-3rem'});}
 				//$("#gatePop").animate({bottom:'0'});
 				$("#gateA").append("<img id='pic' src='../img/library1.png'/>");
-				$("#gateB").append("<img id='pic' src='../img/library2.jpg'/>");
+				$("#gateB").append("<img id='pic' src='../img/library2.JPG'/>");
 				//if(isRefresh == false){$("#gatePop").animate({bottom:'0'});}
 				//$("#gatePop").unbind();
 				if(navDest == latlngData.LibraryG1 | navDest == latlngData.LibraryG2){
