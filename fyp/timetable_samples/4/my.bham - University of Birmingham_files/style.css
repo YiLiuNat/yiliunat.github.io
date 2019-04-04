@@ -1071,9 +1071,10 @@ border: none;
 }
 
 #header {
-	background: white; /*Clifford changed on 18-04-2011, orginal: background:#036;*/
-	border-bottom: #669900 solid; /*Clifford changed on 18-04-2011, orginal:  border-bottom:solid #CC0;*/
-	margin-bottom:15px;
+        background: white; /*Clifford changed on 18-04-2011, orginal: background:#036;*/
+        border-bottom: #669900 solid; /*Clifford changed on 18-04-2011, orginal:
+        border-bottom:solid #CC0;*/
+        margin-bottom:15px;
 }
 
 #mainBody {
@@ -1113,10 +1114,10 @@ border: none;
 }
 
 #registerPan {
-	background:	#EFEFEF;
+        background:     #EFEFEF;
         border-top:#ff0000 solid thick;/*border-top:#CC0 solid thick;*/
-	margin:15px 5px 15px auto;
-	padding:2px;
+        margin:15px 5px 15px auto;
+        padding:2px;
 }
 
 #rightPan {
@@ -1129,7 +1130,7 @@ border: none;
 }
 
 #welcomePan, #infoPan {
-	border-top:#ff0000 solid thick;/*CC0 solid thick;*/
+        border-top:#ff0000 solid thick;/*CC0 solid thick;*/
 }
 
 #welcomePan {
@@ -1199,18 +1200,21 @@ border: none;
 }
 
 /* uPortal Styles - moved from portal.css so that clients don't have to redeploy skin */
-.tcc_sections ul {
+.tcc_sections .uportal-text-small {
 	margin: 0px;
 	padding-left: 40px;
 }
-.uportal-text p {
-	margin-top: 0px;
-}
-.uportal-text-small-no-bullet{
+
+.tcc_sections .uportal-text-small-no-bullet{
 	color : Black;
 	font-family: verdana, helvetica, arial, sans-serif;
 	font-size : 10px;
 	list-style-type:none;
+	padding-left: 0px;
+}
+
+.uportal-text p {
+    margin-top: 0px;
 }
 
 .subsection_content {

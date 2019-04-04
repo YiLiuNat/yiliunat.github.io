@@ -672,6 +672,16 @@ function initMap() {
 				onChangeHandler();
 				$("#gatePop").animate({bottom:'-3rem'});
 				break;
+			case ("Hawort"):
+				mulGate = false;
+				navDest = latlngData.Hawort;
+				if(lastSelection != "Hawort"){
+					originalCenter = map.getCenter();
+				}
+				lastSelection = "Hawort";
+				onChangeHandler();
+				$("#gatePop").animate({bottom:'-3rem'});
+				break;
 		}
 
 	}); //GATE POP-UP END
