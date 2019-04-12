@@ -39,6 +39,7 @@ Open “/src/RUN_THIS/run.htm” or visit https://yiliunat.github.io/fyp on your
 ### Note:
 (I) Not all the coordinates of UoB buildings were recorded in this system, such an
 implementation would be very time consuming and irrelevant to the computer science field.
+
 (II) The following buildings are samples of multiple entrance building:
 [ _‘Aston Webb Great Hall’, ‘Staff House’, ‘Library’_ ]
 
