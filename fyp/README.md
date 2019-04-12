@@ -36,7 +36,7 @@ Open “/src/RUN_THIS/run.htm” or visit https://yiliunat.github.io/fyp on your
 5. **Delete the uploaded timetable:**
     5.1 Open the sidebar (the top-left button) and click the “ _delete this timetable_ ” button.
 
-Note:
+### Note:
 (I) Not all the coordinates of UoB buildings were recorded in this system, such an
 implementation would be very time consuming and irrelevant to the computer science field.
 (II) The following buildings are samples of multiple entrance building:
