@@ -1,17 +1,18 @@
 # How to run the programme
 [![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) 
 
-Pre-requisites:
+**Pre-requisites:**
 
 1. An Internet connection.
 2. A computer or smart phone with any modern browser (Google Chrome is recommended).
-* Make sure (1) the private mode of your web browser is turned off and (2) the location service
+3. Make sure (1) the private mode of your web browser is turned off and (2) the location service
     is turned on.
 
-Run:
+**Run:**
+
 Open “/src/RUN_THIS/run.htm” or visit https://yiliunat.github.io/fyp on your browser.
 
-Test Scheme:
+**Test Scheme:**
 
 1. Basic functions:
     1.1 Click the drop-down menu and select any building to test the navigation function.
