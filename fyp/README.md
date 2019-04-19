@@ -1,5 +1,5 @@
 # How to run the programme
-Yi Liu - March 2019
+*Yi Liu - March 2019*
 
 ### Pre-requisites:
 
@@ -10,7 +10,7 @@ Yi Liu - March 2019
 
 ### Run:
 
-Open “/src/RUN_THIS/run.htm” or visit https://yiliunat.github.io/fyp on your browser.
+Open “/src/html/index.htm” or visit https://yiliunat.github.io/fyp on your browser.
 
 ### Test Scheme:
 
