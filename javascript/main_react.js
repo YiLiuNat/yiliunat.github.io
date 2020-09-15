@@ -7,6 +7,8 @@ function Nat(props){
   );
 }
 
+alert();
+
 function render() {
 	ReactDOM.render(
 		Nat(),
