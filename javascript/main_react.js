@@ -1,18 +1,19 @@
-function Nat(props){
+function Nat(props) {
 	return (
 		<div>
 			<h1>Hello, Nat!</h1>
-			<h2>icon</h2>
+			<h2>icon1</h2>
+			<a href="/fyp">Final Year Project</a>
 		</div>
-  );
+	);
 }
 
-alert();
+
 
 function render() {
 	ReactDOM.render(
 		Nat(),
-	    document.getElementById('nat')
+		document.getElementById('nat')
 	);
 }
 render();
