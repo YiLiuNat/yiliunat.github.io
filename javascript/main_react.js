@@ -2,9 +2,19 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div>
+				<Title />
+			</div>
+		);
+	}
+}
+
+class Title extends React.Component {
+	render() {
+		return (
+			<div id="title">
 				<h1>Hello, Nat!</h1>
-				<h2>Yi Liu</h2>
-				<a href="/fyp">Final Year Project</a>
+				<h2> Yi Liu </h2> 
+				<a href = "/fyp" > Final Year Project </a>
 			</div>
 		);
 	}
