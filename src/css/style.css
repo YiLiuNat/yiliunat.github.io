@@ -25,12 +25,15 @@ html {
 }
 
 #title {
+  position: absolute;
   font-size: 0.3rem;
+  left: 1rem;
 }
 
 #fypDetail {
   font-size: 0.2rem;
   width: 4rem;
+
 }
 
 
