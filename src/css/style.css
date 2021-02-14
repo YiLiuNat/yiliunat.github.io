@@ -12,16 +12,24 @@ body {
   background-position: center center;
 }
 
-/*html {
+html {
   font-size: 100px;
   -ms-touch-action: none;
   height: 100%;
   overflow: hidden;
-}*/
+}
 
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+#title {
+  font-size: 0.3rem;
+}
+
+#fypDetail {
+  font-size: 0.2rem;
 }
 
 
