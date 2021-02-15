@@ -41,19 +41,33 @@ html {
 #menu {
   position: absolute;
   left: 50%;
+  top:0.2rem;
   width: 10rem;
   margin-left: -5rem;
   
 }
 
-#projectsBtn {
+#aboutBtn {
+  position: absolute;
   text-align: center;
   font-size: 0.3rem;
   color: white;
   background-color: transparent;
   border-style: none;
-
+  left: 1.5rem;
 }
+
+#projectsBtn {
+  position: absolute;
+  text-align: center;
+  font-size: 0.3rem;
+  color: white;
+  background-color: transparent;
+  border-style: none;
+  left: 3rem;
+}
+
+
 
 #sideBarBtn {
   position: absolute;

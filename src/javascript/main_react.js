@@ -38,7 +38,13 @@ class Menu extends React.Component {
 					id="projectsBtn"
 					onClick={() => alert("Project")}
 				>
-					Projects
+					PROJECT
+				</button>
+				<button
+					id="aboutBtn"
+					onClick={() => alert("About")}
+				>
+					ABOUT
 				</button>
 			</div>
 		);
