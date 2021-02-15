@@ -2,6 +2,7 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div>
+				<Menu />
 				<Title />
 			</div>
 		);
@@ -24,6 +25,16 @@ campus path planning system via the user-centred design; Planed a path automatic
 					</div>
 				</div>
 				 
+			</div>
+		);
+	}
+}
+
+class Menu extends React.Component {
+	render() {
+		return (
+			<div id="menu">
+				<div id="projectsBtn">Projects</div>
 			</div>
 		);
 	}

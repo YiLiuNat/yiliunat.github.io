@@ -26,9 +26,10 @@ html {
 }
 
 #title {
-  position: absolute;
+  position: relative;
   font-size: 0.3rem;
   left: 1rem;
+  top: 1.8rem;
 }
 
 #fypDetail {
@@ -37,6 +38,18 @@ html {
 
 }
 
+#menu {
+  position: absolute;
+  left: 50%;
+  width: 10rem;
+  margin-left: -5rem;
+  
+}
+
+#projectsBtn {
+  text-align: center;
+  font-size: 0.3rem;
+}
 
 #sideBarBtn {
   position: absolute;
