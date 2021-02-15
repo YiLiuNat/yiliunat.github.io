@@ -42,7 +42,7 @@ class Menu extends React.Component {
 				</button>
 				<button
 					id="aboutBtn"
-					onClick={() => alert("About")}
+					onClick={() => window.location.href="/"}
 				>
 					ABOUT
 				</button>
