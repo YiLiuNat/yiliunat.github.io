@@ -43,8 +43,21 @@ html {
   left: 50%;
   top:0.2rem;
   width: 10rem;
+  height: 0.7rem;
   margin-left: -5rem;
   
+}
+
+#nameBtn {
+  position: absolute;
+  text-align: center;
+  font-size: 0.3rem;
+  color: white;
+  background-color: transparent;
+  border-style: none;
+  width: 2.2rem;
+  height: 0.7rem;
+  left: 0.1rem;
 }
 
 #aboutBtn {
@@ -54,7 +67,9 @@ html {
   color: white;
   background-color: transparent;
   border-style: none;
-  left: 1.5rem;
+  width: 2.2rem;
+  height: 0.7rem;
+  left: 2.3rem;
 }
 
 #projectsBtn {
@@ -64,7 +79,9 @@ html {
   color: white;
   background-color: transparent;
   border-style: none;
-  left: 3rem;
+  width: 2.2rem;
+  height: 0.7rem;
+  left: 4.5rem;
 }
 
 

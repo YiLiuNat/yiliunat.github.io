@@ -35,10 +35,10 @@ class Menu extends React.Component {
 		return (
 			<div id="menu">
 				<button
-					id="projectsBtn"
-					onClick={() => alert("Project")}
+					id="nameBtn"
+					onClick={() => window.location.href="/"}
 				>
-					PROJECT
+					YI LIU (柳沂)
 				</button>
 				<button
 					id="aboutBtn"
@@ -46,6 +46,14 @@ class Menu extends React.Component {
 				>
 					ABOUT
 				</button>
+				<button
+					id="projectsBtn"
+					onClick={() => alert("Project")}
+				>
+					PROJECT
+				</button>
+
+
 			</div>
 		);
 	}
