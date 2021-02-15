@@ -49,6 +49,10 @@ html {
 #projectsBtn {
   text-align: center;
   font-size: 0.3rem;
+  color: white;
+  background-color: transparent;
+  border-style: none;
+
 }
 
 #sideBarBtn {
