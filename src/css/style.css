@@ -8,12 +8,13 @@ body {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color:transparent;
   -webkit-appearance:none;
-  background: url(/src/img/background.jpg) no-repeat;
+  background: black no-repeat;
   background-position: center center;
 }
 
 html {
   font-size: 100px;
+  color:white;
   -ms-touch-action: none;
   height: 100%;
   overflow: hidden;
