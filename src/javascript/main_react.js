@@ -28,6 +28,14 @@ class Main extends React.Component {
 		console.log(this.state);
 	}
 
+	clickNameBtn() {
+		this.setState({
+			showTitle: true,
+			showProject: false
+		});
+		console.log(this.state);
+	}
+
 	render() {
 		const {
 			showTitle,
@@ -39,7 +47,7 @@ class Main extends React.Component {
 				<div id="menu">
 					<button
 						id="nameBtn"
-						onClick={() => window.location.href="/"}
+						onClick={this.clickNameBtn.bind(this)}
 					>
 						YI LIU (柳沂)
 					</button>
