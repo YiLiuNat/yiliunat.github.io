@@ -65,16 +65,21 @@ html {
 }
 
 * {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 #title {
-  position: relative;
+  position: absolute;
   font-family: 'Oleo Script';
   font-size: 0.3rem;
   left: 1rem;
   top: 1.8rem;
+  margin: 0;
+  background-image: url(/src/img/title_bg.png);
+  background-size: cover;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: white;
 }
 
 #titleLeft {
