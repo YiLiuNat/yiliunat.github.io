@@ -101,7 +101,6 @@ html {
   height: 0.6rem;
   left: 1.8rem;
   font-family:'Oleo Script',Sans-Serif;
-  font-weight: 100;
 }
 
 #projectsBtn {
@@ -117,6 +116,18 @@ html {
   font-family:'Oleo Script',Sans-Serif;
 }
 
+#funStuffBtn {
+  position: absolute;
+  text-align: center;
+  font-size: 0.23rem;
+  color: white;
+  background-color: transparent;
+  border-style: none;
+  width: 1.5rem;
+  height: 0.6rem;
+  left:4.2rem;
+  font-family:'Oleo Script',Sans-Serif;
+}
 
 
 #sideBarBtn {

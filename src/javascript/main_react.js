@@ -54,6 +54,19 @@ class Main extends React.Component {
 		console.log(this.state);
 	}
 
+	scrollToAnchor = (anchorName) => {
+		if (anchorName) { //找到锚点
+			let anchorElement = document.getElementById(anchorName);
+
+			if (anchorElement) {
+				anchorElement.scrollIntoView({
+					block: 'start',
+					behavior: 'smooth'
+				});
+			}
+		}
+	}
+
 	render() {
 		const {
 			showTitle,
@@ -73,13 +86,19 @@ class Main extends React.Component {
 						id="aboutBtn"
 						onClick={() => window.location.href="/"}
 					>
-						About
+						ABOUT
 					</button>
 					<button
 						id="projectsBtn"
 						onClick={this.clickProjectBtn.bind(this)}
 					>
-						Projects
+						PROJECTS
+					</button>
+					<button
+						id="funStuffBtn"
+						onClick={() => window.location.href="#projects"}
+					>
+						FUN STUFF
 					</button>
 				</div>
 				
