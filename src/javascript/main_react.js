@@ -80,7 +80,13 @@ class Main extends React.Component {
 					</button>
 					<button
 						id="projectsBtn"
-						onClick={this.clickProjectBtn.bind(this)}
+						onClick={
+							function() {
+								window.location.href="#!projects";
+								window.location.reload();
+								/*this.clickProjectBtn.bind(this)} 原版SPA显示隐藏组件方法*/
+							}
+						}
 					>
 						PROJECTS
 					</button>
