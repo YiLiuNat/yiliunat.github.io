@@ -67,7 +67,7 @@ class Main extends React.Component {
 						id="nameBtn"
 						onClick={this.clickNameBtn.bind(this)}
 					>
-						YI LIU (柳沂)
+						<span id="nameEng">YI LIU &nbsp;</span><span id="nameCHN">柳 沂</span>
 					</button>
 					<button
 						id="aboutBtn"
