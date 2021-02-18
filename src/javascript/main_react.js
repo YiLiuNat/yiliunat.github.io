@@ -12,17 +12,20 @@ class Title extends React.Component {
 class Projects extends React.Component {
 	render() {
 		return (
-			<div id="fypProject"> 
-				<div id="fypTitle">
+			<div id="projectSection"> 
+				<div id="projectTitle">
 					<a href = "/fyp" target="_blank"> Final Year Project </a>
 				</div>
-				<div id="fypDetail">
+				<div id="projectDetail">
 					<p>Researched mainly on the online-map interaction topics, with JavaScript as the main programming language. Provided an integrated solution for student timetables and
 		campus path planning system via the user-centred design; Planed a path automatically for students to reach their lecture buildings based on their timetable.</p>
 					<p>Developed an online mobile web-app, which has been designed to behave like a native mobile app (compatible with both Android and iOS system); Allowed visitors to navigate university’s landmarks or buildings, and enabled students to upload their timetables for an automatically updated map that helped them plan paths for their next lectures.</p>
 
 				</div>
-			</div>
+				<div id="projectTitle">
+					<a href = "https://github.com/YiLiuNat/YiLiu-Dissertations/blob/master/2018-11%20A%20Meal%20Planning%20System%20to%20Support%20Students%20%E2%80%98Eating%20Well%E2%80%99/Dissertation.pdf" target="_blank"> Human-Computer Interaction Project </a>
+				</div> 
+			</div> 
 		);
 	}
 }

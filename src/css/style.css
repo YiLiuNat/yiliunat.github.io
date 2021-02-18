@@ -42,26 +42,26 @@ html {
   transform: translate(-3rem,0rem);
 }
 
-#fypProject {
+#projectSection {
   position: absolute;
-  left: 2rem;
   top: 1.8rem;
-  width: 100%;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-#fypTitle {
-  position: absolute;
+#projectTitle {
+  position: relative;
   left: 0;
-  top: 0;
-  font-size: 0.5rem;
+  font-size: 0.3rem;
 }
 
-#fypDetail {
-  top: 1rem;
-  position: absolute;
+#projectDetail {
+  position: relative;
+  text-align: justify;
   font-size: 0.2rem;
-  margin-right: 4rem;
 }
+
+
 
 #menu {
   position: absolute;
