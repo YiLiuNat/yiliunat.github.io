@@ -111,7 +111,7 @@ class Main extends React.Component {
 					</button>
 				</div>
 				
-				{(window.location.hash == "#!projects")?(document.title="Projects - Yi Liu 项目", <Projects />):null}
+				{(window.location.hash == "#!projects")?(document.title="Projects - Yi Liu 柳沂的项目笔记本", <Projects />):null}
 				{/*showProjects ? (<Projects />) : null*/}
 				{(window.location.hash == "")?(<Title />):null}
 
