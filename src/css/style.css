@@ -75,44 +75,45 @@ html {
 #nameBtn {
   position: absolute;
   text-align: center;
-  font-size: 0.2rem;
+  font-size: 0.23rem;
   color: white;
   background-color: transparent;
   border-style: none;
-  width: 2.2rem;
+  width: 1.8rem;
   height: 0.6rem;
   left: 0.1rem;
   font-family:'Oleo Script',Sans-Serif;
 }
 
 #nameCHN {
-  font-size: 0.18rem;
+  font-size: 0.2rem;
   font-family: 'Noto Sans SC', Sans-Serif;
 }
 
 #aboutBtn {
   position: absolute;
   text-align: center;
-  font-size: 0.2rem;
+  font-size: 0.23rem;
   color: white;
   background-color: transparent;
   border-style: none;
   width: 1.2rem;
   height: 0.6rem;
-  left: 2.2rem;
+  left: 1.8rem;
   font-family:'Oleo Script',Sans-Serif;
+  font-weight: 100;
 }
 
 #projectsBtn {
   position: absolute;
   text-align: center;
-  font-size: 0.2rem;
+  font-size: 0.23rem;
   color: white;
   background-color: transparent;
   border-style: none;
   width: 1.2rem;
   height: 0.6rem;
-  left: 3.6rem;
+  left: 3rem;
   font-family:'Oleo Script',Sans-Serif;
 }
 

@@ -73,13 +73,13 @@ class Main extends React.Component {
 						id="aboutBtn"
 						onClick={() => window.location.href="/"}
 					>
-						ABOUT
+						About
 					</button>
 					<button
 						id="projectsBtn"
 						onClick={this.clickProjectBtn.bind(this)}
 					>
-						PROJECT
+						Projects
 					</button>
 				</div>
 				
