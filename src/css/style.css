@@ -36,7 +36,6 @@ html {
   background-size: cover;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: white;
 }
 
 #titleLeft {
@@ -88,6 +87,7 @@ html {
 
 #nameCHN {
   font-size: 0.18rem;
+  font-family: 'Noto Sans SC', Sans-Serif;
 }
 
 #aboutBtn {
@@ -100,6 +100,7 @@ html {
   width: 2rem;
   height: 0.7rem;
   left: 2.3rem;
+  font-family:'Oleo Script',Sans-Serif;
 }
 
 #projectsBtn {
@@ -112,6 +113,7 @@ html {
   width: 2rem;
   height: 0.7rem;
   left: 4.5rem;
+  font-family:'Oleo Script',Sans-Serif;
 }
 
 
