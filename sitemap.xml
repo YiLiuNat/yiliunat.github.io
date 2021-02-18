@@ -13,4 +13,11 @@
  <changefreq>weekly</changefreq>
 </url>
 
+<url>
+ <loc>https://yiliu.tech/#!projects</loc>
+ <priority>0.3</priority>
+ <lastmod>2021-02-18</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+
 </urlset>
