@@ -9,7 +9,7 @@ class Title extends React.Component {
 	}
 }
 
-class Project extends React.Component {
+class Projects extends React.Component {
 	render() {
 		return (
 			<div id="fypProject"> 
@@ -32,7 +32,7 @@ class Main extends React.Component {
 		super(props);
 		this.state = {
 			showTitle: true,
-			showProject: false
+			showProjects: false
 		};
 	}
 
@@ -41,7 +41,7 @@ class Main extends React.Component {
 	clickProjectBtn() {
 		this.setState({
 			showTitle: false,
-			showProject: true
+			showProjects: true
 		});
 		console.log(this.state);
 	}
@@ -49,28 +49,17 @@ class Main extends React.Component {
 	clickNameBtn() {
 		this.setState({
 			showTitle: true,
-			showProject: false
+			showProjects: false
 		});
 		console.log(this.state);
 	}
 
-	scrollToAnchor = (anchorName) => {
-		if (anchorName) { //找到锚点
-			let anchorElement = document.getElementById(anchorName);
 
-			if (anchorElement) {
-				anchorElement.scrollIntoView({
-					block: 'start',
-					behavior: 'smooth'
-				});
-			}
-		}
-	}
 
 	render() {
 		const {
 			showTitle,
-			showProject
+			showProjects
 		} = this.state;
 
 		return (
@@ -78,7 +67,8 @@ class Main extends React.Component {
 				<div id="menu">
 					<button
 						id="nameBtn"
-						onClick={this.clickNameBtn.bind(this)}
+						onClick={() => window.location.href="/" /*onClick={this.clickNameBtn.bind(this)} 原版SPA显示隐藏组件方法*/}
+						
 					>
 						<span id="nameEng">YI LIU &nbsp;</span><span id="nameCHN">柳 沂</span>
 					</button>
@@ -96,25 +86,25 @@ class Main extends React.Component {
 					</button>
 					<button
 						id="funStuffBtn"
-						onClick={() => window.location.href="#projects"}
+						onClick={
+							function(){
+								window.location.href="#!projects";
+								window.location.reload();
+							}
+						}
 					>
 						FUN STUFF
 					</button>
 				</div>
 				
+				{(window.location.hash == "#!projects")?(<Projects />):null}
+				{/*showProjects ? (<Projects />) : null*/}
+				{(window.location.hash == "")?(<Title />):null}
 
-				{
-					showTitle ? (<Title />) : null //是否显示Titile
-				}
-
-				{
-					showProject ? (<Project />) : null
-				}
 
 			</div>
 		);
 	}
-
 }
 
 
