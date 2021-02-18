@@ -23,7 +23,9 @@ class Projects extends React.Component {
 
 				</div>
 				<div id="projectTitle">
-					<a href = "https://github.com/YiLiuNat/YiLiu-Dissertations/blob/master/2018-11%20A%20Meal%20Planning%20System%20to%20Support%20Students%20%E2%80%98Eating%20Well%E2%80%99/Dissertation.pdf" target="_blank"> Human-Computer Interaction Project </a>
+					<a href = "https://github.com/YiLiuNat/YiLiu-Dissertations/blob/master/2018-11%20A%20Meal%20Planning%20System%20to%20Support%20Students%20%E2%80%98Eating%20Well%E2%80%99/Dissertation.pdf" target="_blank">
+						Human Computer Interaction Project
+					</a>
 				</div>
 				<div id="projectDetail">
 					<p>Gathered requirements of the project, with online questionnaire designed to find the target users; Conducted interviews with users to further learn about the user requirements. Designed a system to support students ‘Eating Well’ and provided different solutions for different user requirements.</p>
