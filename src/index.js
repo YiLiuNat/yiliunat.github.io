@@ -1,3 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './style.css';
+import './font-face.css';
+import './Noto+Serif+SC.css';
+
 class Title extends React.Component {
 	render() {
 		return (
@@ -78,7 +84,8 @@ class Main extends React.Component {
 						onClick={() => window.location.href="/" /*onClick={this.clickNameBtn.bind(this)} 原版SPA显示隐藏组件方法*/}
 						
 					>
-						<span id="nameEng">YI LIU &nbsp;</span><span id="nameCHN">柳 沂</span>
+						<span id="nameEng">YI LIU &nbsp;</span>
+						<span id="nameCHN">柳 沂</span>
 					</button>
 					<button
 						id="aboutBtn"
@@ -154,7 +161,7 @@ class Main extends React.Component {
 
 ReactDOM.render(
 	<Main />,
-	document.getElementById('nat')
+	document.getElementById('root')
 );
 
 
